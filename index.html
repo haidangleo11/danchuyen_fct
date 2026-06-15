@@ -46,14 +46,45 @@
 
             <section id="tab-library" class="hidden space-y-4">
                 <h2 class="text-xl font-bold text-gray-800 border-b pb-2">Thư viện lừa đảo</h2>
+
+
                 <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-xl">
-                    <h3 class="font-bold text-yellow-800 text-lg">Giả mạo Công an</h3>
-                    <p class="text-gray-700 mt-1">Gọi điện dọa bắt giam, yêu cầu chuyển tiền vào "tài khoản tạm giữ".</p>
+                    <h3 class="font-bold text-yellow-800 text-lg">Giả mạo Công an / Tòa án</h3>
+                    <p class="text-gray-700 mt-1">Gọi điện dọa bắt giam liên quan đường dây rửa tiền, ma túy. Yêu cầu chuyển tiền vào "tài khoản tạm giữ" để xác minh.</p>
                 </div>
+
                 <div class="p-4 bg-blue-50 border border-blue-200 rounded-xl">
                     <h3 class="font-bold text-blue-800 text-lg">Giả mạo Ngân hàng</h3>
-                    <p class="text-gray-700 mt-1">Gửi SMS chứa link lạ yêu cầu đăng nhập để mở khóa tài khoản.</p>
+                    <p class="text-gray-700 mt-1">Gửi SMS chứa đường link lạ yêu cầu đăng nhập để mở khóa tài khoản, nhằm đánh cắp tên đăng nhập, mật khẩu và mã OTP.</p>
                 </div>
+
+                <div class="p-4 bg-red-50 border border-red-200 rounded-xl">
+                    <h3 class="font-bold text-red-800 text-lg">Giả mạo VNeID / Cán bộ Thuế</h3>
+                    <p class="text-gray-700 mt-1">Dụ dỗ tải các ứng dụng có đuôi ".apk" ngoài cửa hàng chính thức. Khi cài đặt sẽ bị chiếm toàn bộ quyền điều khiển điện thoại.</p>
+                </div>
+
+                <div class="p-4 bg-purple-50 border border-purple-200 rounded-xl">
+                    <h3 class="font-bold text-purple-800 text-lg">Việc nhẹ lương cao</h3>
+                    <p class="text-gray-700 mt-1">Tuyển CTV chốt đơn Shopee, xem video TikTok. Ban đầu cho rút tiền lãi thật, sau đó ép nạp số tiền lớn làm nhiệm vụ rồi chiếm đoạt.</p>
+                </div>
+
+                <div class="p-4 bg-orange-50 border border-orange-200 rounded-xl">
+                    <h3 class="font-bold text-orange-800 text-lg">Hack nick / Deepfake mượn tiền</h3>
+                    <p class="text-gray-700 mt-1">Chiếm đoạt tài khoản mạng xã hội của người thân. Dùng AI tạo video khuôn mặt giả (Deepfake) gọi vài giây rồi nhắn tin mượn tiền gấp.</p>
+                </div>
+
+                <div class="p-4 bg-teal-50 border border-teal-200 rounded-xl">
+                    <h3 class="font-bold text-teal-800 text-lg">Dọa khóa SIM điện thoại</h3>
+                    <p class="text-gray-700 mt-1">Tự xưng là nhà mạng viễn thông, báo khóa SIM sau 2 tiếng. Yêu cầu cung cấp CCCD hoặc bấm cú pháp lạ để chiếm đoạt số điện thoại.</p>
+                </div>
+
+                <div class="p-4 bg-indigo-50 border border-indigo-200 rounded-xl">
+                    <h3 class="font-bold text-indigo-800 text-lg">Lừa đảo bưu phẩm / Shipper ảo</h3>
+                    <p class="text-gray-700 mt-1">Báo có bưu phẩm từ nước ngoài bắt đóng phí hải quan, hoặc shipper ảo gọi báo giao hàng và gửi mã QR nhận hàng chứa mã độc.</p>
+                </div>
+
+
+
             </section>
 
         </main>
@@ -126,7 +157,7 @@
 
             // L2-08 Lỗi 3: Mất mạng (Offline)
             if (!navigator.onLine) {
-                alert("Máy bác đang không có mạng. Bác kiểm tra lại WiFi hoặc 4G rồi thử lại nha!");
+                alert("Máy bác đang không có mạng. Bác kiểm tra lại WiFi hoặc mạng 3G/4G/5G rồi thử lại nha!");
                 return;
             }
 
