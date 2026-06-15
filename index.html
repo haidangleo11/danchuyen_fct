@@ -2,112 +2,368 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <!-- Thẻ quan trọng giúp giao diện tự động co giãn vừa vặn trên màn hình Safari iPhone -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ScamCheck - Công cụ kiểm tra tin nhắn lừa đảo</title>
-    <!-- Tích hợp Tailwind CSS qua CDN nhanh gọn, không cần cài đặt -->
+    <title>ScamCheck - An toàn không gian số</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col justify-between p-4 font-sans">
+<body class="bg-gray-100 min-h-screen font-sans flex justify-center">
 
-    <!-- KHUNG NỘI DUNG CHÍNH (Được căn giữa, vừa khít chiều rộng điện thoại) -->
-    <main class="max-w-md w-full mx-auto bg-white p-6 rounded-xl shadow-md mt-6">
-        <h1 class="text-2xl font-bold text-center text-blue-600 mb-6">ScamCheck</h1>
+    <div class="w-full max-w-md bg-white shadow-xl relative pb-20 flex flex-col min-h-screen">
         
-        <!-- Ô nhập liệu đủ lớn (Textarea) -->
-        <div class="mb-5">
-            <label for="messageInput" class="block text-gray-700 font-semibold mb-2 text-lg">
-                Dán tin nhắn nghi ngờ vào đây:
-            </label>
-            <!-- text-lg đảm bảo font chữ hiển thị từ 18px trở lên giúp người lớn tuổi dễ đọc -->
-            <textarea 
-                id="messageInput" 
-                rows="6" 
-                class="w-full p-4 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-lg text-gray-800 placeholder-gray-400 shadow-inner"
-                placeholder="Ví dụ: Chuc mung ban da trung thuong chuyen du lich..."></textarea>
+        <header class="bg-blue-600 text-white p-4 text-center sticky top-0 z-10 shadow-md">
+            <h1 class="text-2xl font-bold">ScamCheck</h1>
+            <p class="text-sm opacity-90">Công cụ hỗ trợ an toàn số</p>
+        </header>
+
+        <main class="flex-grow p-4">
+            
+            <section id="tab-home" class="space-y-4">
+                <label class="block text-gray-800 font-semibold text-lg">
+                    Dán tin nhắn nghi ngờ vào đây:
+                </label>
+                <textarea id="messageInput" rows="5" class="w-full p-4 border-2 border-gray-300 rounded-xl focus:border-blue-500 outline-none" placeholder="Dán tin nhắn nghi ngờ vào đây..."></textarea>
+
+                <div class="flex flex-wrap gap-2 mt-3 mb-3">
+                    <button type="button" onclick="fillSample('bank')" class="bg-blue-100 hover:bg-blue-200 text-blue-700 px-3 py-1.5 rounded-lg text-sm font-medium">🏦 Ngân hàng</button>
+                    <button type="button" onclick="fillSample('police')" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-lg text-sm font-medium">👮 Công an</button>
+                    <button type="button" onclick="fillSample('lottery')" class="bg-green-100 hover:bg-green-200 text-green-700 px-3 py-1.5 rounded-lg text-sm font-medium">🎁 Trúng thưởng</button>
+                </div>
+                                
+                <button id="checkBtn" class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl text-xl hover:bg-blue-700 shadow-md transition">
+                    🔍 Kiểm tra ngay
+                </button>
+
+                <div id="resultArea" class="hidden mt-6 space-y-4">
+                    </div>
+            </section>
+
+            <section id="tab-history" class="hidden space-y-4">
+                <h2 class="text-xl font-bold text-gray-800 border-b pb-2">Lịch sử kiểm tra</h2>
+                <div id="historyList" class="space-y-3">
+                    <p class="text-gray-600 text-lg">Chưa có tin nhắn nào được kiểm tra gần đây.</p>
+                </div>
+            </section>
+
+            <section id="tab-library" class="hidden space-y-4">
+                <h2 class="text-xl font-bold text-gray-800 border-b pb-2">Thư viện lừa đảo</h2>
+                <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-xl">
+                    <h3 class="font-bold text-yellow-800 text-lg">Giả mạo Công an</h3>
+                    <p class="text-gray-700 mt-1">Gọi điện dọa bắt giam, yêu cầu chuyển tiền vào "tài khoản tạm giữ".</p>
+                </div>
+                <div class="p-4 bg-blue-50 border border-blue-200 rounded-xl">
+                    <h3 class="font-bold text-blue-800 text-lg">Giả mạo Ngân hàng</h3>
+                    <p class="text-gray-700 mt-1">Gửi SMS chứa link lạ yêu cầu đăng nhập để mở khóa tài khoản.</p>
+                </div>
+            </section>
+
+        </main>
+
+        <nav class="fixed bottom-0 w-full max-w-md bg-white border-t border-gray-300 flex justify-around text-gray-500 z-50">
+            <button onclick="switchTab('tab-home')" class="flex-1 py-3 hover:text-blue-600 hover:bg-blue-50 transition flex flex-col items-center">
+                <span class="text-2xl">🏠</span>
+                <span class="text-sm font-semibold mt-1">Trang chủ</span>
+            </button>
+            <button onclick="switchTab('tab-history')" class="flex-1 py-3 hover:text-blue-600 hover:bg-blue-50 transition border-l border-r border-gray-200 flex flex-col items-center">
+                <span class="text-2xl">🕒</span>
+                <span class="text-sm font-semibold mt-1">Lịch sử</span>
+            </button>
+            <button onclick="switchTab('tab-library')" class="flex-1 py-3 hover:text-blue-600 hover:bg-blue-50 transition flex flex-col items-center">
+                <span class="text-2xl">📚</span>
+                <span class="text-sm font-semibold mt-1">Thư viện</span>
+            </button>
+        </nav>
+        
+        <div class="absolute bottom-16 left-0 w-full bg-gray-100 text-center text-[10px] text-gray-500 p-2 border-t border-gray-200">
+            ScamCheck là công cụ giáo dục do nhóm học viên phát triển và không thay thế cảnh báo chính thức.
         </div>
 
-        <!-- Nút Kiểm tra to rõ, dễ bấm -->
-        <button 
-            id="checkBtn" 
-            class="w-full bg-blue-600 text-white font-bold py-4 px-6 rounded-lg text-xl hover:bg-blue-700 active:scale-95 transition-transform shadow-md">
-            Kiểm tra ngay
-        </button>
-        
-        <!-- Khu vực hiển thị kết quả thô (Tạm thời ẩn đi, sẽ hiện ở các hạng mục sau) -->
-        <div id="resultArea" class="mt-6 p-4 bg-gray-50 border border-gray-200 rounded-lg hidden">
-            <h3 class="font-bold text-gray-700 text-lg mb-2">Kết quả phân tích:</h3>
-            <p id="resultText" class="text-gray-800 text-lg whitespace-pre-line"></p>
-        </div>
-    </main>
+    </div>
 
-    <!-- DÒNG LƯU Ý PHÁP LÝ BẮT BUỘC (Luôn cố định ở chân trang) -->
-    <footer class="max-w-md w-full mx-auto text-center text-xs text-gray-500 p-4 mt-8 border-t border-gray-200 leading-relaxed">
-        ScamCheck là công cụ giáo dục do nhóm học viên phát triển và đánh giá của ứng dụng không thay thế cảnh báo chính thức từ ngân hàng hoặc cơ quan chức năng. Khi nghi ngờ, người dùng nên gọi tổng đài chính thức của ngân hàng được in trên thẻ.
-    </footer>
-
-    <!-- LOGIC SỰ KIỆN CƠ BẢN -->
     <script src="config.js"></script>
-
     <script>
-        // Thêm từ khóa 'async' vào hàm để sử dụng được lệnh chờ 'await'
+        // ================= HÀM CHUYỂN TAB & ĐIỀN TIN MẪU (L2-06) =================
+        function switchTab(tabId) {
+            document.getElementById('tab-home').classList.add('hidden');
+            document.getElementById('tab-history').classList.add('hidden');
+            document.getElementById('tab-library').classList.add('hidden');
+            document.getElementById(tabId).classList.remove('hidden');
+        }
+
+        function fillSample(type) {
+            const input = document.getElementById('messageInput');
+            if(type === 'bank') input.value = "Tai khoan VCB cua ban se bi khoa sau 2h. Vui long dang nhap www.vcb-update.com de xac thuc.";
+            if(type === 'police') input.value = "Bo Cong An thong bao: So dien thoai cua ban lien quan den vu an rua tien. Yeu cau chuyen tien vao tai khoan tam giu 123456789 de dieu tra.";
+            if(type === 'lottery') input.value = "Chuc mung thue bao trung thuong 1 xe SH. Truoc khi nhan giai vui long nap the cao 500k de lam thu tuc xac minh.";
+        }
+
+        // ================= HỒ SƠ THÁM TỬ (Cập nhật lấy trích dẫn L2-04) =================
+        const SYSTEM_PROMPT = `Bạn là Thám tử phân tích tin nhắn lừa đảo. Trả về ĐÚNG 1 khối JSON duy nhất theo mẫu:
+        {
+            "risk": "NGUY_HIEM",
+            "title": "Nguy hiểm",
+            "desc": "Mô tả lý do...",
+            "signs": ["Dấu hiệu 1", "Dấu hiệu 2"],
+            "quotes": ["www.vcb-update.com", "chuyen tien vao tai khoan tam giu", "nap the cao 500k"],
+            "actions": ["Hành động 1", "Hành động 2", "Hành động 3"]
+        }`;
+
+        // ================= LOGIC GỌI AI VÀ XỬ LÝ 5 LỖI (L2-07 & L2-08) =================
         document.getElementById('checkBtn').addEventListener('click', async () => {
-            const text = document.getElementById('messageInput').value.trim();
-            if (!text) {
-                alert('Bác ơi, vui lòng dán hoặc nhập nội dung tin nhắn trước khi bấm kiểm tra ạ!');
+            const originalText = document.getElementById('messageInput').value.trim();
+            const btn = document.getElementById('checkBtn');
+
+            // L2-08 Lỗi 1: Tin nhắn rỗng
+            if (!originalText) {
+                alert("Bác ơi, vui lòng điền tin nhắn vào trước khi bấm kiểm tra ạ!");
                 return;
             }
-            
-            const resultArea = document.getElementById('resultArea');
-            const resultText = document.getElementById('resultText');
-            const checkBtn = document.getElementById('checkBtn');
-            
-            // 1. Hiển thị trạng thái đang tải (Loading) để người dùng khỏi sốt ruột
-            resultArea.classList.remove('hidden');
-            resultText.innerText = "⏳ Hệ thống đang phân tích tin nhắn, bác đợi một chút nhé...";
-            checkBtn.disabled = true; // Khóa nút bấm tạm thời
-            checkBtn.classList.add('opacity-50', 'cursor-not-allowed');
-            checkBtn.innerText = "Đang kiểm tra...";
+
+            // L2-08 Lỗi 2: Tin nhắn quá dài (> 5000 ký tự)
+            if (originalText.length > 5000) {
+                alert("Tin nhắn này dài quá (hơn 5000 ký tự), bác vui lòng cắt bớt chỉ để lại phần chính nhé!");
+                return;
+            }
+
+            // L2-08 Lỗi 3: Mất mạng (Offline)
+            if (!navigator.onLine) {
+                alert("Máy bác đang không có mạng. Bác kiểm tra lại WiFi hoặc 4G rồi thử lại nha!");
+                return;
+            }
+
+            // L2-07: Hiệu ứng màn hình chờ (Loading)
+            btn.disabled = true;
+            btn.innerHTML = `<span class="animate-pulse">⏳ Thám tử đang phân tích...</span>`;
+            document.getElementById('resultArea').classList.add('hidden');
+
+            let finalResult = {
+                risk: "NGHI_NGO", title: "Chưa rõ ràng", desc: "Hệ thống gặp sự cố kỹ thuật.",
+                signs: ["Không thể phân tích."], quotes: [], 
+                actions: ["Tạm thời không làm theo tin nhắn", "Hỏi ý kiến người thân"]
+            };
 
             try {
-                // 2. Chuẩn bị URL và Prompt gửi cho Gemini (Dùng bản 1.5 Flash cho tốc độ siêu nhanh)
-                const apiKey = CONFIG.GEMINI_API_KEY;
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-                
-                // Prompt thô cho Cấp 1
-                const prompt = `Bác tôi 50 tuổi nhận được tin nhắn sau: "${text}". Hãy phân tích ngắn gọn trong 3-4 câu xem đây có phải lừa đảo không và giải thích vì sao.`;
-
-                // 3. Lệnh gọi mạng bất đồng bộ (fetch)
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${CONFIG.GEMINI_API_KEY}`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        contents: [{ parts: [{ text: prompt }] }]
+                        contents: [
+                            { role: "user", parts: [{ text: SYSTEM_PROMPT }] },
+                            { role: "user", parts: [{ text: originalText }] }
+                        ]
                     })
                 });
 
-                if (!response.ok) {
-                    throw new Error(`Lỗi kết nối mạng: ${response.status}`);
+                const data = await response.json();
+                
+                // L2-08 Lỗi 4: AI từ chối trả lời (Do vi phạm chính sách an toàn của Google)
+                if (data.candidates && data.candidates[0].finishReason !== 'STOP') {
+                    throw new Error("AI refused to answer");
                 }
 
-                const data = await response.json();
+                let aiText = data.candidates[0].content.parts[0].text.replace(/```json/g, "").replace(/```/g, "").trim();
+                finalResult = JSON.parse(aiText);
 
-                // 4. Bóc tách kết quả văn bản thô từ AI trả về
-                const aiResponse = data.candidates[0].content.parts[0].text;
+                // =====================================================================
+                // CHÈN BƯỚC 3: XỬ LÝ LOGIC CÔ TÂM LÝ VÀO ĐÂY (L3-02, L3-03, L3-05)
+                // =====================================================================
+                finalResult.coTamLyText = null; 
 
-                // 5. Hiển thị kết quả ra màn hình
-                resultText.innerText = aiResponse;
-
+                // L3-03: Điều kiện kích hoạt - Chỉ gọi khi mức độ rủi ro là Nghi ngờ hoặc Nguy hiểm
+                if (finalResult.risk === "NGHI_NGO" || finalResult.risk === "NGUY_HIEM") {
+                    
+                    try {
+                        // Đã sửa thành CONFIG.GEMINI_API_KEY đồng bộ với Thám tử bên trên
+                        const responseCoTamLy = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${CONFIG.GEMINI_API_KEY}`, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                contents: [{ 
+                                    parts: [{ text: `${CO_TAM_LY_PROMPT}\n\nTin nhắn cần phân tích: "${originalText}"` }] 
+                                }]
+                            })
+                        });
+                        
+                        const dataCoTamLy = await responseCoTamLy.json();
+                        
+                        // Chỉ thêm trường mới, hoàn toàn không ghi đè lên finalResult cũ
+                        if (dataCoTamLy.candidates && dataCoTamLy.candidates[0]?.content?.parts?.[0]?.text) {
+                            finalResult.coTamLyText = dataCoTamLy.candidates[0].content.parts[0].text.trim();
+                        }
+                    } catch (coTamLyError) {
+                        console.error("Lỗi tầng Cô tâm lý nhưng không làm sập hệ thống:", coTamLyError);
+                        finalResult.coTamLyText = "Cô tâm lý hiện đang bận hỗ trợ các bác khác một chút, bác hãy thử lại sau nhé!";
+                    }
+                }
             } catch (error) {
-                console.error("Lỗi khi gọi API:", error);
-                resultText.innerText = "❌ Xin lỗi bác, hệ thống đang bận hoặc gặp lỗi mạng. Bác vui lòng thử lại sau nhé!";
+                console.error("Lỗi:", error);
+                // L2-08 Lỗi 5: Dữ liệu sai cấu trúc hoặc lỗi bất ngờ
+                finalResult.desc = "Hệ thống AI đang quá tải hoặc trả về dữ liệu không đọc được. Bác hãy tạm thời cảnh giác nhé!";
             } finally {
-                // 6. Hoàn tất thì mở khóa nút bấm lại như cũ
-                checkBtn.disabled = false;
-                checkBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-                checkBtn.innerText = "Kiểm tra ngay";
+                btn.disabled = false;
+                btn.innerHTML = "🔍 Kiểm tra ngay";
+                renderResult(finalResult, originalText);
+                saveToHistory(originalText, finalResult);
             }
         });
+
+        // ================= RENDER KẾT QUẢ & TÔ VÀNG (L2-04 & L2-05) =================
+        function renderResult(data, originalText) {
+            const resultArea = document.getElementById('resultArea');
+            if (!resultArea) return;
+
+            // Bắt buộc mở lại vùng hiển thị kết quả (Bỏ thuộc tính ẩn hidden)
+            resultArea.classList.remove('hidden');
+            
+            // 1. Xác định màu sắc khung thẻ cảnh báo theo mức độ rủi ro của Thám tử
+            let cardColors = "border-green-500 bg-green-50 text-green-700";
+            let badgeColor = "bg-green-100 text-green-800";
+            
+            if (data.risk === "NGUY_HIEM") {
+                cardColors = "border-red-500 bg-red-50 text-red-700";
+                badgeColor = "bg-red-100 text-red-800";
+            } else if (data.risk === "NGHI_NGO") {
+                cardColors = "border-yellow-500 bg-yellow-50 text-yellow-700";
+                badgeColor = "bg-yellow-100 text-yellow-800";
+            }
+
+            // 2. Chuẩn bị HTML cho phần Cô tâm lý (Nếu có dữ liệu thì chèn khối tím)
+            let coTamLyHTML = '';
+            if (data.coTamLyText) {
+                coTamLyHTML = `
+                    <div class="mt-4 p-4 bg-purple-50 border border-purple-200 rounded-xl shadow-sm">
+                        <h4 class="text-md font-bold text-purple-800 mb-2 flex items-center gap-1">
+                            🧠 Hiểu vì sao mình suýt tin?
+                        </h4>
+                        <p class="text-gray-700 text-sm leading-relaxed italic">"${data.coTamLyText}"</p>
+                    </div>
+                `;
+            }
+
+            // Duyệt danh sách mảng bằng hàm .map() theo chuẩn yêu cầu
+            const signsHTML = data.signs && data.signs.length > 0 
+                ? data.signs.map(sign => `<li class="mt-1">${sign}</li>`).join('')
+                : '<li>Không tìm thấy dấu hiệu lừa đảo rõ ràng.</li>';
+
+            const quotesHTML = data.quotes && data.quotes.length > 0
+                ? `<div class="mt-3 bg-orange-50 border border-orange-200 p-3 rounded-xl">
+                    <h5 class="font-bold text-orange-800 text-sm mb-1">Cụm từ đáng ngờ trích xuất:</h5>
+                    <div class="flex flex-wrap gap-1">${data.quotes.map(q => `<span class="bg-orange-100 text-orange-800 text-xs font-mono px-2 py-0.5 rounded border border-orange-200">"${q}"</span>`).join('')}</div>
+                   </div>`
+                : '';
+
+            const actionsHTML = data.actions && data.actions.length > 0
+                ? `<div class="mt-3 bg-blue-50 border border-blue-200 p-3 rounded-xl">
+                    <h5 class="font-bold text-blue-800 text-sm mb-1">Hành động khuyến nghị:</h5>
+                    <ul class="list-decimal pl-4 text-sm text-gray-700 space-y-1">${data.actions.map(act => `<li>${act}</li>`).join('')}</ul>
+                   </div>`
+                : '';
+
+            // 3. Đổ toàn bộ dữ liệu giao diện vào đúng khối resultArea
+            resultArea.innerHTML = `
+                <div class="flex justify-between items-center border-b pb-2">
+                    <h2 class="text-xl font-bold text-gray-800">Kết quả phân tích:</h2>
+                    <span class="px-3 py-1 rounded-full text-xs font-bold ${badgeColor}">${data.title || 'Chưa rõ'}</span>
+                </div>
+                
+                <div class="p-4 rounded-xl border-l-8 ${cardColors} shadow-sm">
+                    <h3 class="text-2xl font-bold uppercase">${data.title || 'Chưa rõ'}</h3>
+                    <p class="text-base text-gray-800 mt-2">${data.desc}</p>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                    <h4 class="font-bold text-lg mb-2">Dấu hiệu nhận biết:</h4>
+                    <ul class="list-disc pl-5 text-base text-gray-700 space-y-1">
+                        ${signsHTML}
+                    </ul>
+                    ${quotesHTML}
+                    ${actionsHTML}
+                </div>
+
+                ${coTamLyHTML}
+            `;
+        }
+
+        // Hàm hiển thị lịch sử từ LocalStorage ra màn hình
+        function renderHistory() {
+            const historyList = document.getElementById('historyList');
+            let history = JSON.parse(localStorage.getItem('scamCheckHistory')) || [];
+
+            if (history.length === 0) {
+                historyList.innerHTML = '<p class="text-gray-600 text-lg">Chưa có tin nhắn nào được kiểm tra gần đây.</p>';
+                return;
+            }
+
+            historyList.innerHTML = '';
+            
+            history.forEach((item, index) => {
+                let badgeColor = "bg-green-100 text-green-800";
+                if (item.riskType === "NGUY_HIEM") badgeColor = "bg-red-100 text-red-800";
+                if (item.riskType === "NGHI_NGO") badgeColor = "bg-yellow-100 text-yellow-800";
+
+                historyList.innerHTML += `
+                    <div onclick="viewSavedResult(${index})" class="p-4 bg-white border border-gray-200 rounded-xl shadow-sm hover:border-blue-400 cursor-pointer transition-all">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs text-gray-500">${item.time}</span>
+                            <span class="px-2 py-1 rounded text-xs font-bold ${badgeColor}">${item.riskTitle}</span>
+                        </div>
+                        <p class="text-gray-800 text-sm line-clamp-2 italic">"${item.text}"</p>
+                    </div>
+                `;
+            });
+        }
+
+        // Hàm lưu kết quả mới vào lịch sử
+        function saveToHistory(originalText, data) {
+            let history = JSON.parse(localStorage.getItem('scamCheckHistory')) || [];
+
+            const newEntry = {
+                text: originalText,
+                riskTitle: data.title,
+                riskType: data.risk,
+                desc: data.desc || "",
+                signs: data.signs || [],
+                quotes: data.quotes || [],
+                actions: data.actions || [],
+                coTamLyText: data.coTamLyText || null,
+                time: new Date().toLocaleString('vi-VN')
+            };
+
+            history.unshift(newEntry);
+            if (history.length > 10) {
+                history.pop();
+            }
+
+            localStorage.setItem('scamCheckHistory', JSON.stringify(history));
+            renderHistory();
+        }
+
+        // Hàm xem lại kết quả cũ khi click vào lịch sử (Đạt chuẩn L2-09)
+        function viewSavedResult(index) {
+            let history = JSON.parse(localStorage.getItem('scamCheckHistory')) || [];
+            const selectedItem = history[index];
+            
+            if (!selectedItem) return;
+
+            document.getElementById('messageInput').value = selectedItem.text;
+
+            const savedData = {
+                title: selectedItem.riskTitle,
+                risk: selectedItem.riskType,
+                desc: selectedItem.desc,
+                signs: selectedItem.signs,
+                quotes: selectedItem.quotes,
+                actions: selectedItem.actions,
+                coTamLyText: selectedItem.coTamLyText
+            };
+
+            renderResult(savedData, selectedItem.text);
+            switchTab('tab-home'); 
+        }
+
+        // Tự động gọi hàm hiển thị lịch sử ngay khi trang web vừa tải xong
+        window.onload = () => {
+            renderHistory();
+        };
     </script>
 </body>
 </html>
