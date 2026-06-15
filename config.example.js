@@ -1,0 +1,1 @@
+const CONFIG = { GEMINI_API_KEY: "ĐIỀN_KHÓA_API_DO_MENTOR_CẤP_VÀO_ĐÂY" };
