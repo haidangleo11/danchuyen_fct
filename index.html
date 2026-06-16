@@ -177,12 +177,14 @@
                         ]
                     })
                 });
-
+                console.log("HTTP status:", response.status);
                 const data = await response.json();
+                console.log("full rep:", data);
                 if (!data?.candidates?.length) throw new Error('No candidates');
                 if (data.candidates[0].finishReason && data.candidates[0].finishReason !== 'STOP') throw new Error('AI refused to answer');
 
-                const rawText = data.candidates[0]?.content?.parts?.[0]?.text || '';
+                const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+                console.log("raw ai:", rawText);
                 const aiText = cleanJsonText(rawText);
                 finalResult = normalizeResult(JSON.parse(aiText));
 
@@ -761,7 +763,7 @@
             }
         }
 
-        function filterLibrary(group) { 
+        function filterLibrary(group) {
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('bg-blue-600', 'text-white', 'shadow-sm');
                 btn.classList.add('bg-gray-100', 'text-gray-600');
