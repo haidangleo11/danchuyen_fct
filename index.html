@@ -16,7 +16,6 @@
         </header>
 
         <main class="flex-grow p-4">
-            
             <section id="tab-home" class="space-y-4">
                 <label class="block text-gray-800 font-semibold text-lg">
                     Dán tin nhắn nghi ngờ vào đây:
@@ -33,8 +32,8 @@
                     🔍 Kiểm tra ngay
                 </button>
 
-                <div id="resultArea" class="hidden mt-6 space-y-4">
-                    </div>
+                <div id="resultArea" class="hidden mt-6 space-y-4"></div>
+                <div id="url-scanner-result" class="hidden mt-4 p-4 rounded-xl border transition-all"></div>
             </section>
 
             <section id="tab-history" class="hidden space-y-4">
@@ -46,53 +45,16 @@
 
             <section id="tab-library" class="hidden space-y-4">
                 <h2 class="text-xl font-bold text-gray-800 border-b pb-2">Thư viện lừa đảo</h2>
-
-
-                <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-xl">
-                    <h3 class="font-bold text-yellow-800 text-lg">Giả mạo Công an / Tòa án</h3>
-                    <p class="text-gray-700 mt-1">Gọi điện dọa bắt giam liên quan đường dây rửa tiền, ma túy. Yêu cầu chuyển tiền vào "tài khoản tạm giữ" để xác minh.</p>
+                
+                <div class="flex flex-wrap gap-1.5 pb-2 border-b border-gray-100">
+                    <button onclick="filterLibrary('all')" id="btn-filter-all" class="filter-btn bg-blue-600 text-white px-2.5 py-1 rounded-lg text-xs font-semibold shadow-sm transition">Tất cả</button>
+                    <button onclick="filterLibrary('bank')" id="btn-filter-bank" class="filter-btn bg-gray-100 text-gray-600 hover:bg-gray-200 px-2.5 py-1 rounded-lg text-xs font-semibold transition">🏦 Ngân hàng</button>
+                    <button onclick="filterLibrary('police')" id="btn-filter-police" class="filter-btn bg-gray-100 text-gray-600 hover:bg-gray-200 px-2.5 py-1 rounded-lg text-xs font-semibold transition">👮 Công an</button>
+                    <button onclick="filterLibrary('lottery')" id="btn-filter-lottery" class="filter-btn bg-gray-100 text-gray-600 hover:bg-gray-200 px-2.5 py-1 rounded-lg text-xs font-semibold transition">🎁 Thưởng</button>
+                    <button onclick="filterLibrary('delivery')" id="btn-filter-delivery" class="filter-btn bg-gray-100 text-gray-600 hover:bg-gray-200 px-2.5 py-1 rounded-lg text-xs font-semibold transition">📦 Giao hàng</button>
                 </div>
 
-                <div class="p-4 bg-blue-50 border border-blue-200 rounded-xl">
-                    <h3 class="font-bold text-blue-800 text-lg">Giả mạo Ngân hàng</h3>
-                    <p class="text-gray-700 mt-1">Gửi SMS chứa đường link lạ yêu cầu đăng nhập để mở khóa tài khoản, nhằm đánh cắp tên đăng nhập, mật khẩu và mã OTP.</p>
-                </div>
-
-                <div class="p-4 bg-red-50 border border-red-200 rounded-xl">
-                    <h3 class="font-bold text-red-800 text-lg">Giả mạo VNeID / Cán bộ Thuế</h3>
-                    <p class="text-gray-700 mt-1">Dụ dỗ tải các ứng dụng có đuôi ".apk" ngoài cửa hàng chính thức. Khi cài đặt sẽ bị chiếm toàn bộ quyền điều khiển điện thoại.</p>
-                </div>
-
-                <div class="p-4 bg-purple-50 border border-purple-200 rounded-xl">
-                    <h3 class="font-bold text-purple-800 text-lg">Việc nhẹ lương cao</h3>
-                    <p class="text-gray-700 mt-1">Tuyển CTV chốt đơn Shopee, xem video TikTok. Ban đầu cho rút tiền lãi thật, sau đó ép nạp số tiền lớn làm nhiệm vụ rồi chiếm đoạt.</p>
-                </div>
-
-                <div class="p-4 bg-orange-50 border border-orange-200 rounded-xl">
-                    <h3 class="font-bold text-orange-800 text-lg">Hack nick / Deepfake mượn tiền</h3>
-                    <p class="text-gray-700 mt-1">Chiếm đoạt tài khoản mạng xã hội của người thân. Dùng AI tạo video khuôn mặt giả (Deepfake) gọi vài giây rồi nhắn tin mượn tiền gấp.</p>
-                </div>
-
-                <div class="p-4 bg-teal-50 border border-teal-200 rounded-xl">
-                    <h3 class="font-bold text-teal-800 text-lg">Dọa khóa SIM điện thoại</h3>
-                    <p class="text-gray-700 mt-1">Tự xưng là nhà mạng viễn thông, báo khóa SIM sau 2 tiếng. Yêu cầu cung cấp CCCD hoặc bấm cú pháp lạ để chiếm đoạt số điện thoại.</p>
-                </div>
-
-                <div class="p-4 bg-indigo-50 border border-indigo-200 rounded-xl">
-                    <h3 class="font-bold text-indigo-800 text-lg">Lừa đảo bưu phẩm / Shipper ảo</h3>
-                    <p class="text-gray-700 mt-1">Báo có bưu phẩm từ nước ngoài bắt đóng phí hải quan, hoặc shipper ảo gọi báo giao hàng và gửi mã QR nhận hàng chứa mã độc.</p>
-                </div>
-
-                <div class="p-4 bg-red-200 border-2 border-red-600 rounded-xl shadow-md">
-                    <h3 class="font-bold text-red-950 text-lg">
-                        🚨 CẢNH BÁO NGUY HIỂM: Lừa đảo qua SMS sử dụng logo các nhà mạng, ngân hàng,...
-                    </h3>
-                    <p class="text-red-900 mt-1">
-                        Sử dụng logo của các nhà mạng, ngân hàng, Bộ Công An,... nhắn tin qua SMS nhằm đòi tiền. Lý do có thể sử dụng các logo là do các thiết bị BTS di chuyển gần bác (thiết bị này được giấu ở trong ô tô, xe tải,...), phát và chỉnh sửa mạng của thiết bị đang sử dụng (từ 4G sang 2G), giúp chúng chỉnh sửa logo và trông uy tín hơn.
-                    </p>
-                </div>
-
-
+                <div id="dynamicLibraryList" class="space-y-3"></div>
             </section>
 
         </main>
@@ -120,7 +82,16 @@
 
     <script src="config.js"></script>
     <script>
-        // ================= HÀM CHUYỂN TAB & ĐIỀN TIN MẪU (L2-06) =================
+        function switchTab(tabId) {
+            document.getElementById('tab-home').classList.add('hidden');
+            document.getElementById('tab-history').classList.add('hidden');
+            document.getElementById('tab-library').classList.add('hidden');
+            
+            // Bổ sung thêm dòng này để ẩn tab luyện tập
+            document.getElementById('tab-practice').classList.add('hidden'); 
+            
+            document.getElementById(tabId).classList.remove('hidden');
+        }
         function switchTab(tabId) {
             document.getElementById('tab-home').classList.add('hidden');
             document.getElementById('tab-history').classList.add('hidden');
@@ -135,7 +106,6 @@
             if(type === 'lottery') input.value = "Chuc mung thue bao trung thuong 1 xe SH. Truoc khi nhan giai vui long nap the cao 500k de lam thu tuc xac minh.";
         }
 
-        // ================= HỒ SƠ THÁM TỬ (Cập nhật lấy trích dẫn L2-04) =================
         const SYSTEM_PROMPT = `Bạn là Thám tử phân tích tin nhắn lừa đảo. Trả về ĐÚNG 1 khối JSON duy nhất theo mẫu:
         {
             "risk": "NGUY_HIEM",
@@ -146,33 +116,29 @@
             "actions": ["Hành động 1", "Hành động 2", "Hành động 3"]
         }`;
 
-        // ================= LOGIC GỌI AI VÀ XỬ LÝ 5 LỖI (L2-07 & L2-08) =================
         document.getElementById('checkBtn').addEventListener('click', async () => {
             const originalText = document.getElementById('messageInput').value.trim();
             const btn = document.getElementById('checkBtn');
 
-            // L2-08 Lỗi 1: Tin nhắn rỗng
             if (!originalText) {
                 alert("Bác ơi, vui lòng điền tin nhắn vào trước khi bấm kiểm tra ạ!");
                 return;
             }
 
-            // L2-08 Lỗi 2: Tin nhắn quá dài (> 5000 ký tự)
             if (originalText.length > 5000) {
                 alert("Tin nhắn này dài quá (hơn 5000 ký tự), bác vui lòng cắt bớt chỉ để lại phần chính nhé!");
                 return;
             }
 
-            // L2-08 Lỗi 3: Mất mạng (Offline)
             if (!navigator.onLine) {
                 alert("Máy bác đang không có mạng. Bác kiểm tra lại WiFi hoặc mạng 3G/4G/5G rồi thử lại nha!");
                 return;
             }
 
-            // L2-07: Hiệu ứng màn hình chờ (Loading)
             btn.disabled = true;
             btn.innerHTML = `<span class="animate-pulse">⏳ Thám tử đang phân tích...</span>`;
             document.getElementById('resultArea').classList.add('hidden');
+            document.getElementById('url-scanner-result').classList.add('hidden');
 
             let finalResult = {
                 risk: "NGHI_NGO", title: "Chưa rõ ràng", desc: "Hệ thống gặp sự cố kỹ thuật.",
@@ -194,7 +160,6 @@
 
                 const data = await response.json();
                 
-                // L2-08 Lỗi 4: AI từ chối trả lời (Do vi phạm chính sách an toàn của Google)
                 if (data.candidates && data.candidates[0].finishReason !== 'STOP') {
                     throw new Error("AI refused to answer");
                 }
@@ -202,16 +167,10 @@
                 let aiText = data.candidates[0].content.parts[0].text.replace(/```json/g, "").replace(/```/g, "").trim();
                 finalResult = JSON.parse(aiText);
 
-                // =====================================================================
-                // CHÈN BƯỚC 3: XỬ LÝ LOGIC CÔ TÂM LÝ VÀO ĐÂY (L3-02, L3-03, L3-05)
-                // =====================================================================
                 finalResult.coTamLyText = null; 
 
-                // L3-03: Điều kiện kích hoạt - Chỉ gọi khi mức độ rủi ro là Nghi ngờ hoặc Nguy hiểm
                 if (finalResult.risk === "NGHI_NGO" || finalResult.risk === "NGUY_HIEM") {
-                    
                     try {
-                        // Đã sửa thành CONFIG.GEMINI_API_KEY đồng bộ với Thám tử bên trên
                         const responseCoTamLy = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${CONFIG.GEMINI_API_KEY}`, {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
@@ -224,36 +183,32 @@
                         
                         const dataCoTamLy = await responseCoTamLy.json();
                         
-                        // Chỉ thêm trường mới, hoàn toàn không ghi đè lên finalResult cũ
                         if (dataCoTamLy.candidates && dataCoTamLy.candidates[0]?.content?.parts?.[0]?.text) {
                             finalResult.coTamLyText = dataCoTamLy.candidates[0].content.parts[0].text.trim();
                         }
                     } catch (coTamLyError) {
-                        console.error("Lỗi tầng Cô tâm lý nhưng không làm sập hệ thống:", coTamLyError);
+                        console.error(coTamLyError);
                         finalResult.coTamLyText = "Cô tâm lý hiện đang bận hỗ trợ các bác khác một chút, bác hãy thử lại sau nhé!";
                     }
                 }
             } catch (error) {
-                console.error("Lỗi:", error);
-                // L2-08 Lỗi 5: Dữ liệu sai cấu trúc hoặc lỗi bất ngờ
+                console.error(error);
                 finalResult.desc = "Hệ thống AI đang quá tải hoặc trả về dữ liệu không đọc được. Bác hãy tạm thời cảnh giác nhé!";
             } finally {
                 btn.disabled = false;
                 btn.innerHTML = "🔍 Kiểm tra ngay";
                 renderResult(finalResult, originalText);
+                renderUrlScanner(originalText);
                 saveToHistory(originalText, finalResult);
             }
         });
 
-        // ================= RENDER KẾT QUẢ & TÔ VÀNG (L2-04 & L2-05) =================
         function renderResult(data, originalText) {
             const resultArea = document.getElementById('resultArea');
             if (!resultArea) return;
 
-            // Bắt buộc mở lại vùng hiển thị kết quả (Bỏ thuộc tính ẩn hidden)
             resultArea.classList.remove('hidden');
             
-            // 1. Xác định màu sắc khung thẻ cảnh báo theo mức độ rủi ro của Thám tử
             let cardColors = "border-green-500 bg-green-50 text-green-700";
             let badgeColor = "bg-green-100 text-green-800";
             
@@ -265,7 +220,6 @@
                 badgeColor = "bg-yellow-100 text-yellow-800";
             }
 
-            // 2. Chuẩn bị HTML cho phần Cô tâm lý (Nếu có dữ liệu thì chèn khối tím)
             let coTamLyHTML = '';
             if (data.coTamLyText) {
                 coTamLyHTML = `
@@ -278,7 +232,6 @@
                 `;
             }
 
-            // Duyệt danh sách mảng bằng hàm .map() theo chuẩn yêu cầu
             const signsHTML = data.signs && data.signs.length > 0 
                 ? data.signs.map(sign => `<li class="mt-1">${sign}</li>`).join('')
                 : '<li>Không tìm thấy dấu hiệu lừa đảo rõ ràng.</li>';
@@ -297,7 +250,6 @@
                    </div>`
                 : '';
 
-            // 3. Đổ toàn bộ dữ liệu giao diện vào đúng khối resultArea
             resultArea.innerHTML = `
                 <div class="flex justify-between items-center border-b pb-2">
                     <h2 class="text-xl font-bold text-gray-800">Kết quả phân tích:</h2>
@@ -322,7 +274,91 @@
             `;
         }
 
-        // Hàm hiển thị lịch sử từ LocalStorage ra màn hình
+        function scanMessageUrls(text) {
+            if (!text) return null;
+            const urlRegex = /(https?:\/\/[^\s<>"]+|www\.[^\s<>"]+|[a-zA-Z0-9-]+\.(?:com|vn|net|org|gov|top|cc|xyz|info|club)(?:\/[^\s<>"]*)?)/gi;
+            const matches = text.match(urlRegex);
+            if (!matches) return [];
+            return matches.map(url => {
+                let cleanUrl = url.toLowerCase().trim();
+                let isFake = false;
+                let warningReason = "";
+                let fakeType = "";
+                if (cleanUrl.includes('vietcornbank')) {
+                    isFake = true;
+                    fakeType = "Thay thế ký tự tinh vi (rn thành m)";
+                    warningReason = "Cảnh báo chữ 'rn' cố tình viết dính nhau để lừa mắt bạn nhìn thành chữ 'm' nhằm mạo danh Ngân hàng Vietcombank.";
+                } else if ((cleanUrl.includes('vcb') || cleanUrl.includes('vietcombank')) && !cleanUrl.includes('vietcombank.com.vn')) {
+                    isFake = true;
+                    fakeType = "Tên miền Ngân hàng giả mạo";
+                    warningReason = "Đường dẫn chứa từ khóa ngân hàng nhưng sử dụng đuôi mở rộng lạ hoặc không khớp với trang chủ chính thống.";
+                } else if (cleanUrl.includes('vneid') && !cleanUrl.includes('gov.vn')) {
+                    isFake = true;
+                    fakeType = "Giả mạo Cổng dịch vụ công";
+                    warningReason = "Ứng dụng định danh VNeID hoặc cơ quan pháp luật bắt buộc phải dùng đuôi .gov.vn của Chính phủ Việt Nam. Link này là giả mạo!";
+                } else if (cleanUrl.includes('shopee') && !cleanUrl.includes('shopee.vn') && !cleanUrl.includes('shopee.com')) {
+                    isFake = true;
+                    fakeType = "Giả mạo trang sự kiện Shopee";
+                    warningReason = "Đường dẫn sử dụng tên thương hiệu Shopee chèn thêm từ khóa khuyến mãi nhằm dụ dỗ nhận quà lừa đảo.";
+                } else if ((cleanUrl.includes('ghtk') || cleanUrl.includes('giaohang')) && !cleanUrl.includes('giaohangtietkiem.vn')) {
+                    isFake = true;
+                    fakeType = "Giả mạo hãng vận chuyển";
+                    warningReason = "Tin nhắn mạo danh shipper yêu cầu cập nhật lại địa chỉ hoặc thanh toán phí đơn hàng qua liên kết lạ.";
+                }
+                return { originalUrl: url, isFake, fakeType, warningReason };
+            });
+        }
+
+        function renderUrlScanner(originalText) {
+            const container = document.getElementById('url-scanner-result');
+            if (!container) return;
+            const scannedLinks = scanMessageUrls(originalText);
+            if (!scannedLinks || scannedLinks.length === 0) {
+                container.classList.add('hidden');
+                return;
+            }
+            container.classList.remove('hidden');
+            const fakeCount = scannedLinks.filter(l => l.isFake).length;
+            let html = `
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="text-lg">🔗</span>
+                    <h3 class="font-bold text-sm text-gray-800">Kết quả soi đường dẫn (${scannedLinks.length} link)</h3>
+                </div>
+            `;
+            if (fakeCount > 0) {
+                container.className = "mt-4 p-4 rounded-xl border border-red-200 bg-red-50/70";
+            } else {
+                container.className = "mt-4 p-4 rounded-xl border border-green-200 bg-green-50/70";
+            }
+            scannedLinks.forEach(link => {
+                if (link.isFake) {
+                    html += `
+                        <div class="bg-white border border-red-200 rounded-lg p-3 mb-2 shadow-sm">
+                            <div class="flex items-center gap-1.5 mb-1 flex-wrap">
+                                <span class="bg-red-600 text-white font-extrabold text-[10px] px-2 py-0.5 rounded shadow-sm">NGUY HIỂM</span>
+                                <span class="text-xs font-bold text-red-700 bg-red-50 px-1.5 py-0.5 rounded border border-red-100">${link.fakeType}</span>
+                            </div>
+                            <p class="text-xs font-mono text-gray-500 break-all bg-gray-50 p-1.5 rounded border border-gray-200 select-all mb-1.5">${link.originalUrl}</p>
+                            <div class="text-[11px] text-red-600 font-medium bg-red-50/50 p-2 rounded border border-dashed border-red-200 leading-relaxed">
+                                ⚠️ <strong>Tuyệt đối không click:</strong> ${link.warningReason}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    html += `
+                        <div class="bg-white border border-green-200 rounded-lg p-3 mb-2 shadow-sm">
+                            <div class="flex items-center gap-1.5 mb-1">
+                                <span class="bg-green-600 text-white font-extrabold text-[10px] px-2 py-0.5 rounded shadow-sm">AN TOÀN</span>
+                                <span class="text-xs text-gray-500">Đường dẫn thông thường</span>
+                            </div>
+                            <p class="text-xs font-mono text-gray-600 break-all bg-gray-50 p-1.5 rounded border border-gray-100">${link.originalUrl}</p>
+                        </div>
+                    `;
+                }
+            });
+            container.innerHTML = html;
+        }
+
         function renderHistory() {
             const historyList = document.getElementById('historyList');
             let history = JSON.parse(localStorage.getItem('scamCheckHistory')) || [];
@@ -351,7 +387,6 @@
             });
         }
 
-        // Hàm lưu kết quả mới vào lịch sử
         function saveToHistory(originalText, data) {
             let history = JSON.parse(localStorage.getItem('scamCheckHistory')) || [];
 
@@ -376,7 +411,6 @@
             renderHistory();
         }
 
-        // Hàm xem lại kết quả cũ khi click vào lịch sử (Đạt chuẩn L2-09)
         function viewSavedResult(index) {
             let history = JSON.parse(localStorage.getItem('scamCheckHistory')) || [];
             const selectedItem = history[index];
@@ -396,12 +430,113 @@
             };
 
             renderResult(savedData, selectedItem.text);
+            renderUrlScanner(selectedItem.text);
             switchTab('tab-home'); 
         }
 
-        // Tự động gọi hàm hiển thị lịch sử ngay khi trang web vừa tải xong
         window.onload = () => {
             renderHistory();
+        };
+
+        const SCAM_LIBRARY_DATA = [
+            { id: 1, group: 'bank', tags: ['Ngân hàng', 'Cảnh báo'], name: 'Giả mạo khóa tài khoản khẩn cấp', desc: 'Gửi SMS Brandname hoặc tin nhắn giả mạo thông báo tài khoản của bạn đang bị khóa hoặc đăng nhập trái phép, yêu cầu nhấn link để xác thực gấp.', example: 'Tai khoan VCB cua ban dang bi tam khoa. Vui long click vao link www.vcb-security-update.com de huy khoa.' },
+            { id: 2, group: 'bank', tags: ['Ngân hàng', 'Giả mạo'], name: 'Thông báo trừ phí dịch vụ lạ', desc: 'Kẻ xấu giả danh tổng đài thông báo bạn đã đăng ký một dịch vụ bảo hiểm hoặc thẻ tín dụng có phí duy trì hàng tháng cực cao, dụ bạn bấm link để hủy.', example: 'Chúc mừng bạn đã kích hoạt dịch vụ thẻ SmartBanking phí 2.000.000đ/tháng. Để hủy dịch vụ vui lòng truy cập https://m-vcb.com' },
+            { id: 3, group: 'bank', tags: ['Ngân hàng', 'Công nghệ'], name: 'Yêu cầu cập nhật định danh sinh trắc học', desc: 'Lợi dụng quy định cập nhật khuôn mặt/CCCD của ngân hàng để gửi các đường link giả mạo nhằm chiếm đoạt tài khoản internet banking.', example: 'Ngan hang thong bao: Thong tin sinh trac hoc cua ban chua hoan thien. Vui long cap nhat tai www.bio-banking-xacthuc.com' },
+            { id: 13, group: 'bank', tags: ['Ngân hàng', 'Nhà mạng', 'Công an'], name: 'SMS Brandname (giả mạo các cơ quan uy tín) giả mạo bằng trạm BTS giả', desc: 'Kẻ gian dùng thiết bị phần cứng (máy phát sóng BTS giả) đặt trên ô tô/xe máy di chuyển quanh khu vực đông người để ép điện thoại nhận tin nhắn lừa đảo. Tin nhắn này sẽ nhảy thẳng vào chung hộp thư (thread) nhắn tin chính thức của Ngân hàng, khiến nạn nhân tin tưởng tuyệt đối.', example: '[⚠️ Vietcombank] Tai khoan cua ban dang dang nhap tren thiet bi la tai Ha Noi. Neu khong phai ban, vui long click vao link https://vcb-digibank-safety.com de huy.' },
+            { id: 4, group: 'police', tags: ['Công an', 'Tâm lý'], name: 'Đe dọa liên quan đường dây tội phạm', desc: 'Mạo danh điều tra viên, viện kiểm sát gọi điện thông báo số tài khoản hoặc số điện thoại của bạn đang liên quan đến đường dây ma túy, rửa tiền.', example: 'Cục Cảnh sát điều tra thông báo: Số chứng minh của ông/bà đang bị tình nghi rửa tiền xuyên quốc gia. Yêu cầu phối hợp làm việc.' },
+            { id: 5, group: 'police', tags: ['Công an', 'Giao thông'], name: 'Thông báo phạt nguội giao thông giả', desc: 'Gửi các văn bản hoặc tin nhắn giả mạo lệnh phạt nguội vi phạm giao thông quá hạn, yêu cầu nộp tiền phạt vào tài khoản cá nhân để xử lý nhanh.', example: 'Cục CSGT thông báo: Phương tiện của bạn có 1 biên bản phạt nguội lỗi quá tốc độ. Vui lòng thanh toán trước 24h tại link sau...' },
+            { id: 6, group: 'police', tags: ['Công an', 'Công nghệ'], name: 'Hỗ trợ nâng cấp VNeID mức độ 2 lỗi', desc: 'Đóng vai cán bộ công an phường/quận gọi điện báo tài khoản VNeID bị lỗi thông tin hệ thống, ép tải file cài đặt ngoài để sửa đổi.', example: 'Chào anh, tôi là công an quận, hồ sơ định danh mức 2 của anh bị lỗi trên hệ thống, anh kết bạn Zalo để tôi gửi app cài lại nhé.' },
+            { id: 7, group: 'lottery', tags: ['Trúng thưởng', 'Sàn thương mại điện tử'], name: 'Trúng thưởng sự kiện tri ân khách hàng', desc: 'Thông báo số điện thoại trúng quà tặng giá trị cao (xe máy, điện thoại) từ sự kiện của sàn TMĐT lớn, bắt đóng phí vận chuyển hoặc thuế trước.', example: 'Chúc mừng số điện thoại 093xxx đã may mắn trúng giải Nhất sự kiện Shopee: 1 Xe SH 150i. Liên hệ Zalo 09xx để làm thủ tục nhận giải.' },
+            { id: 8, group: 'lottery', tags: ['Trúng thưởng', 'Mạng xã hội'], name: 'Tặng quà may mắn miễn phí từ các trang mạng xã hội', desc: 'Dụ dỗ nạn nhân tham gia các nhóm nhận quà tặng gia dụng thông minh miễn phí, sau đó chuyển sang làm nhiệm vụ nạp tiền ăn chênh lệch hoa hồng.', example: 'Kênh TikTok tri ân tặng máy ép hoa quả miễn phí cho 50 người may mắn. Bấm vào link để điền địa chỉ nhận quà ngay.' },
+            { id: 9, group: 'lottery', tags: ['Trúng thưởng', 'Giả mạo'], name: 'Vòng quay may mắn trúng thưởng mặt hàng giá trị cao', desc: 'Các trang web giả mạo hiển thị vòng quay chắc chắn trúng thưởng điện thoại đắt tiền, bắt điền thông tin cá nhân và nạp thẻ cào để làm thủ tục.', example: 'Bạn nhận được 1 lượt quay miễn phí! Chúc mừng bạn đã trúng iPhone 15 Pro Max. Nạp 500k thẻ cào để xác minh thông tin nhận giải.' },
+            { id: 10, group: 'delivery', tags: ['Giao hàng', 'Giả mạo'], name: 'Shipper ảo lừa đảo giao hàng thu hộ COD', desc: 'Kẻ gian rình rập lịch sử mua hàng, gọi điện lúc bạn không có nhà bảo gửi hàng cho người quen và yêu cầu chuyển khoản thanh toán COD trước.', example: 'Alo chị ơi em giao đơn hàng Shopee 320k ạ, em gửi bảo vệ chung cư rồi, chị chuyển khoản vào số tài khoản này giúp em nhé.' },
+            { id: 11, group: 'delivery', tags: ['Giao hàng', 'Công an'], name: 'Bưu phẩm chứa hàng cấm bị tạm giữ', desc: 'Tự xưng là nhân viên hải quan hoặc bưu điện quốc tế báo có quà từ nước ngoài gửi về nhưng bị giữ vì có chất cấm, đòi tiền chạy án.', example: 'Tổng công ty Bưu điện báo: Kiện hàng quốc tế số #9921 của bạn bị giữ tại biên giới. Vui lòng nộp 10 triệu đồng phí thông quan.' },
+            { id: 12, group: 'delivery', tags: ['Giao hàng', 'Mã độc'], name: 'Thông báo sai địa chỉ cập nhật lại đơn', desc: 'Gửi tin nhắn giả mạo đơn vị vận chuyển lớn (J&T, Giao Hàng Tiết Kiệm) báo đơn hàng gặp sự cố sai địa chỉ, dụ click vào link chứa mã độc.', example: 'GHTK thong bao: Don hang của ban khong the phat do sai so nha. Bấm vao link ghtk-capnhat.com de dien lai thong tin nhan.' }
+        ];
+
+        function renderLibrary(filterGroup = 'all') {
+            const listContainer = document.getElementById('dynamicLibraryList');
+            if (!listContainer) return;
+
+            const filteredData = filterGroup === 'all' 
+                ? SCAM_LIBRARY_DATA 
+                : SCAM_LIBRARY_DATA.filter(item => item.group === filterGroup);
+            const TAG_STYLES = {
+                'Ngân hàng': 'bg-blue-100 text-blue-800 border border-blue-200',
+                'Công an': 'bg-red-100 text-red-800 border border-red-200',
+                'Nhà mạng': 'bg-purple-100 text-purple-800 border border-purple-200',
+                'Trúng thưởng': 'bg-green-100 text-green-800 border border-green-200',
+                'Giao hàng': 'bg-orange-100 text-orange-800 border border-orange-200',
+                'Cảnh báo': 'bg-amber-100 text-amber-800 border border-amber-200',
+                'Công nghệ': 'bg-cyan-100 text-cyan-800 border border-cyan-200',
+                'Mạng xã hội': 'bg-pink-100 text-pink-800 border border-pink-200',
+                'Giao thông': 'bg-teal-100 text-teal-800 border border-teal-200',
+                'Giả mạo': 'bg-gray-100 text-gray-700 border border-gray-300',
+                'Tâm lý': 'bg-indigo-100 text-indigo-800 border border-indigo-200',
+                'Sàn TMĐT': 'bg-rose-100 text-rose-800 border border-rose-200',
+                'Mã độc': 'bg-emerald-100 text-emerald-800 border border-emerald-200'
+            };
+
+            listContainer.innerHTML = filteredData.map(item => {
+                const tagsHTML = item.tags.map(tag => {
+                    const colorClass = TAG_STYLES[tag] || 'bg-gray-100 text-gray-600 border border-gray-200';
+                    return `<span class="text-[10px] font-bold px-2 py-0.5 rounded-md shadow-sm ${colorClass}">${tag}</span>`;
+                }).join('');
+
+                return `
+                    <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:border-blue-400 transition animate-fadeIn">
+                        <div class="flex justify-between items-center mb-2.5 gap-2">
+                            <div class="flex flex-wrap gap-1">
+                                ${tagsHTML}
+                            </div>
+                            <button onclick="toggleScamDetail(${item.id})" class="text-blue-600 text-xs font-bold hover:underline flex items-center gap-0.5 shrink-0">
+                                Xem chi tiết <span id="arrow-${item.id}">▼</span>
+                            </button>
+                        </div>
+                        <h4 class="font-bold text-gray-800 text-base cursor-pointer hover:text-blue-600 transition" onclick="toggleScamDetail(${item.id})">${item.name}</h4>
+                        
+                        <div id="detail-${item.id}" class="hidden mt-3 pt-3 border-t border-gray-100 space-y-2">
+                            <p class="text-xs text-gray-600 leading-relaxed"><strong class="text-gray-700">Mô tả thủ đoạn:</strong> ${item.desc}</p>
+                            <div class="bg-red-50 border border-red-100 p-2.5 rounded-lg">
+                                <p class="text-[11px] font-mono text-red-700 italic leading-tight"><strong class="text-red-800 font-sans not-italic block text-xs mb-0.5">Ví dụ tin nhắn thực tế:</strong> "${item.example}"</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function toggleScamDetail(id) {
+            const detailArea = document.getElementById(`detail-${id}`);
+            const arrow = document.getElementById(`arrow-${id}`);
+            if (detailArea.classList.contains('hidden')) {
+                detailArea.classList.remove('hidden');
+                arrow.textContent = '▲';
+            } else {
+                detailArea.classList.add('hidden');
+                arrow.textContent = '▼';
+            }
+        }
+
+        function filterLibrary(group) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white', 'shadow-sm');
+                btn.classList.add('bg-gray-100', 'text-gray-600');
+            });
+
+            const activeBtn = document.getElementById(`btn-filter-${group}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-gray-100', 'text-gray-600');
+                activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-sm');
+            }
+            renderLibrary(group);
+        }
+
+        const oldOnload = window.onload;
+        window.onload = () => {
+            if (oldOnload) oldOnload();
+            renderHistory();
+            renderLibrary('all'); 
         };
     </script>
 </body>
