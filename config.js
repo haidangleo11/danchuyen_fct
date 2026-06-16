@@ -1,5 +1,5 @@
 const CONFIG = {
-    GEMINI_API_KEY: "AQ.Ab8RN6K2YLGq-GMwEXxkmBeKBA5goHIc3ziVRwYb3DsU3unoMw"
+    GEMINI_API_KEY: "AQ.Ab8RN6LpzpHJAiErLoecfjq7qXavEktfMStbPzhSuC3D3DfBkw"
 };
 const CO_TAM_LY_PROMPT = `
 Bạn là "Cô tâm lý", một chuyên gia tư vấn tâm lý học hành vi chuyên hỗ trợ người cao tuổi phòng tránh lừa đảo mạng.
