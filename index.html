@@ -531,27 +531,167 @@
         // --- PRACTICE SECTION ---
         const PRACTICE_SETS = [
             [
-                { text: 'Vietcombank: tài khoản của bạn bị khóa, vui lòng truy cập vcb-update.com', label: 'scam', reason: 'Tên miền giả mạo ngân hàng.' },
-                { text: 'Shopee xác nhận đơn hàng #12345 sẽ giao ngày mai.', label: 'safe', reason: 'Thông báo giao hàng thông thường.' },
-                { text: 'Bộ Công An yêu cầu chuyển tiền để điều tra.', label: 'scam', reason: 'Cơ quan nhà nước không yêu cầu chuyển tiền.' },
-                { text: 'Bạn vừa đăng nhập Gmail từ thiết bị mới.', label: 'safe', reason: 'Thông báo bảo mật hợp lệ.' },
-                { text: 'Chúc mừng bạn trúng iPhone 16 Pro Max.', label: 'scam', reason: 'Chiêu trò trúng thưởng.' },
-                { text: 'Mã OTP của bạn là 832911.', label: 'safe', reason: 'Tin nhắn OTP thông thường.' },
-                { text: 'Đơn hàng của bạn giao thất bại, click ghtk-fake.com.', label: 'scam', reason: 'Tên miền giả.' },
-                { text: 'Google xác nhận thay đổi mật khẩu.', label: 'safe', reason: 'Thông báo chính thức.' },
-                { text: 'Cập nhật sinh trắc học tại bio-bank-update.com.', label: 'scam', reason: 'Link giả mạo ngân hàng.' },
-                { text: 'Biến động số dư +500.000đ.', label: 'safe', reason: 'Thông báo tài khoản.' }
+            { text:'Vietcombank: tài khoản của bạn bị khóa, vui lòng truy cập vcb-update.com', label:'scam', reason:'Tên miền giả mạo ngân hàng.' },
+            { text:'Shopee xác nhận đơn hàng #12345 sẽ giao ngày mai.', label:'safe', reason:'Thông báo giao hàng thông thường.' },
+            { text:'Bộ Công An yêu cầu chuyển tiền để điều tra.', label:'scam', reason:'Cơ quan nhà nước không yêu cầu chuyển tiền.' },
+            { text:'Bạn vừa đăng nhập Gmail từ thiết bị mới.', label:'safe', reason:'Thông báo bảo mật hợp lệ.' },
+            { text:'Chúc mừng bạn trúng iPhone 16 Pro Max.', label:'scam', reason:'Chiêu trò trúng thưởng.' },
+            { text:'Mã OTP của bạn là 832911.', label:'safe', reason:'Tin nhắn OTP thông thường.' },
+            { text:'Đơn hàng của bạn giao thất bại, click ghtk-fake.com.', label:'scam', reason:'Tên miền giả.' },
+            { text:'Google xác nhận thay đổi mật khẩu.', label:'safe', reason:'Thông báo chính thức.' },
+            { text:'Cập nhật sinh trắc học tại bio-bank-update.com.', label:'scam', reason:'Link giả mạo ngân hàng.' },
+            { text:'Biến động số dư +500.000đ.', label:'safe', reason:'Thông báo tài khoản.' }
+            ],
+
+            [
+            { text:'MB Bank: tài khoản sẽ bị khóa sau 30 phút.', label:'scam', reason:'Tạo áp lực thời gian.' },
+            { text:'Facebook gửi mã xác nhận đăng nhập.', label:'safe', reason:'Thông báo xác thực bình thường.' },
+            { text:'Bạn được hoàn thuế 5 triệu đồng, bấm link nhận tiền.', label:'scam', reason:'Dụ người dùng cung cấp thông tin.' },
+            { text:'Lịch học ngày mai được chuyển sang phòng A203.', label:'safe', reason:'Thông báo nội bộ.' },
+            { text:'Chuyển ngay 2 triệu để xác minh tài khoản.', label:'scam', reason:'Không có quy trình xác minh bằng chuyển tiền.' },
+            { text:'Mã xác thực Google của bạn là 119388.', label:'safe', reason:'OTP hợp lệ.' },
+            { text:'Bưu điện giữ kiện hàng của bạn vì chứa chất cấm.', label:'scam', reason:'Chiêu giả danh hải quan.' },
+            { text:'Bạn vừa thanh toán Netflix thành công.', label:'safe', reason:'Thông báo giao dịch.' },
+            { text:'Nhận thưởng Tết 10 triệu đồng miễn phí.', label:'scam', reason:'Lừa đảo trúng thưởng.' },
+            { text:'Điện thoại của bạn đã sao lưu dữ liệu thành công.', label:'safe', reason:'Thông báo hệ thống.' }
+            ],
+
+            [
+            { text:'VNeID của bạn sắp hết hạn, tải APK này để cập nhật.', label:'scam', reason:'Yêu cầu cài APK lạ.' },
+            { text:'Lịch khám bệnh của bạn vào lúc 9h sáng.', label:'safe', reason:'Thông báo bình thường.' },
+            { text:'Ngân hàng yêu cầu gửi OTP để xác minh chủ tài khoản.', label:'scam', reason:'Ngân hàng không xin OTP.' },
+            { text:'Mật khẩu Apple ID vừa được thay đổi.', label:'safe', reason:'Thông báo bảo mật chính thức.' },
+            { text:'Bạn trúng xe SH từ chương trình tri ân.', label:'scam', reason:'Mồi nhử phần thưởng.' },
+            { text:'Đơn hàng Tiki đang được giao.', label:'safe', reason:'Thông báo hợp lệ.' },
+            { text:'Thanh toán tiền điện ngay tại link điệnlực-online.xyz', label:'scam', reason:'Tên miền đáng ngờ.' },
+            { text:'Zoom Meeting bắt đầu sau 10 phút.', label:'safe', reason:'Nhắc lịch họp.' },
+            { text:'Chuyển khoản vào tài khoản tạm giữ để điều tra.', label:'scam', reason:'Giả danh cơ quan chức năng.' },
+            { text:'Bạn đã đăng xuất khỏi tài khoản thành công.', label:'safe', reason:'Thông báo hệ thống.' }
+            ],
+
+            [
+            { text:'Khách sạn xác nhận đặt phòng thành công.', label:'safe', reason:'Thông báo dịch vụ.' },
+            { text:'Tài khoản bị hack, click link này ngay.', label:'scam', reason:'Tạo hoảng loạn.' },
+            { text:'Mã OTP MoMo của bạn là 667811.', label:'safe', reason:'OTP hợp lệ.' },
+            { text:'Nhận học bổng 50 triệu chỉ cần đóng phí hồ sơ.', label:'scam', reason:'Yêu cầu nộp phí trước.' },
+            { text:'Lịch thi được cập nhật trên website trường.', label:'safe', reason:'Thông báo học tập.' },
+            { text:'Xác minh CCCD trực tuyến bằng cách chuyển khoản.', label:'scam', reason:'Không đúng quy trình.' },
+            { text:'Bạn nhận được 1 email mới.', label:'safe', reason:'Thông báo thông thường.' },
+            { text:'Đơn hàng hoàn tiền 100%, bấm link nhận.', label:'scam', reason:'Lừa đảo hoàn tiền.' },
+            { text:'Google Drive đã chia sẻ tệp với bạn.', label:'safe', reason:'Thông báo dịch vụ.' },
+            { text:'Nạp 200k để nhận quà tri ân.', label:'scam', reason:'Lừa đảo phí nhận thưởng.' }
+            ],
+
+            [
+            { text:'Telegram hỗ trợ lấy lại tài khoản, gửi OTP ngay.', label:'scam', reason:'Chiếm đoạt tài khoản.' },
+            { text:'Đăng nhập thành công trên Chrome.', label:'safe', reason:'Thông báo bảo mật.' },
+            { text:'BIDV yêu cầu cập nhật sinh trắc học qua link lạ.', label:'scam', reason:'Link giả mạo.' },
+            { text:'Xe buýt sẽ đến sau 5 phút.', label:'safe', reason:'Thông báo giao thông.' },
+            { text:'Nhận hoàn tiền điện lực tại hoàntiền-vn.top', label:'scam', reason:'Tên miền bất thường.' },
+            { text:'Bạn đã đổi mật khẩu thành công.', label:'safe', reason:'Thông báo chính thức.' },
+            { text:'Công an gọi video yêu cầu cung cấp CCCD hai mặt.', label:'scam', reason:'Giả danh cơ quan nhà nước.' },
+            { text:'Lớp học hôm nay nghỉ.', label:'safe', reason:'Thông báo thông thường.' },
+            { text:'Trúng AirPods miễn phí.', label:'scam', reason:'Mồi nhử quà tặng.' },
+            { text:'Thanh toán Spotify thành công.', label:'safe', reason:'Thông báo giao dịch.' }
+            ],
+
+            [
+            { text:'Hỗ trợ hoàn tiền Shopee, tải ứng dụng này.', label:'scam', reason:'Dụ cài phần mềm độc hại.' },
+            { text:'Mã xác nhận đăng ký tài khoản là 992811.', label:'safe', reason:'OTP bình thường.' },
+            { text:'Bộ Y tế phát quà hỗ trợ, đăng ký tại link này.', label:'scam', reason:'Giả danh cơ quan.' },
+            { text:'Bạn vừa đăng ký thành công khóa học.', label:'safe', reason:'Thông báo dịch vụ.' },
+            { text:'Nạp tiền làm nhiệm vụ nhận hoa hồng.', label:'scam', reason:'Lừa đảo việc làm online.' },
+            { text:'Đơn GrabFood đã giao thành công.', label:'safe', reason:'Thông báo giao hàng.' },
+            { text:'Xác thực tài khoản bằng cách đọc OTP.', label:'scam', reason:'Chiếm đoạt tài khoản.' },
+            { text:'Máy chủ đang bảo trì từ 23h.', label:'safe', reason:'Thông báo hệ thống.' },
+            { text:'Bạn được chọn nhận quà bí mật trị giá 20 triệu.', label:'scam', reason:'Lừa đảo phần thưởng.' },
+            { text:'Lịch hẹn nha khoa ngày mai.', label:'safe', reason:'Thông báo hợp lệ.' }
+            ],
+
+            [
+            { text:'Tài khoản Zalo bị vi phạm, xác minh ngay.', label:'scam', reason:'Tạo áp lực giả.' },
+            { text:'Bạn nhận được cuộc gọi nhỡ.', label:'safe', reason:'Thông báo bình thường.' },
+            { text:'Trúng thưởng Samsung S26 Ultra.', label:'scam', reason:'Lừa đảo trúng thưởng.' },
+            { text:'Kết quả xét nghiệm đã có.', label:'safe', reason:'Thông báo y tế.' },
+            { text:'Ngân hàng hoàn tiền 3 triệu, click link.', label:'scam', reason:'Link lừa đảo.' },
+            { text:'Microsoft gửi mã đăng nhập.', label:'safe', reason:'OTP chính thức.' },
+            { text:'Chuyển khoản trước để nhận hàng.', label:'scam', reason:'Dấu hiệu lừa đảo mua bán.' },
+            { text:'Bạn vừa nhận email mới.', label:'safe', reason:'Thông báo thông thường.' },
+            { text:'Xác minh ví điện tử bằng cách cung cấp mật khẩu.', label:'scam', reason:'Không bao giờ cung cấp mật khẩu.' },
+            { text:'Google Photos đã sao lưu ảnh.', label:'safe', reason:'Thông báo hệ thống.' }
+            ],
+
+            [
+            { text:'Bưu kiện quốc tế bị giữ, đóng phí 5 triệu.', label:'scam', reason:'Giả mạo hải quan.' },
+            { text:'Lịch bảo trì điện khu vực ngày mai.', label:'safe', reason:'Thông báo công cộng.' },
+            { text:'Click link để tránh bị khóa SIM.', label:'scam', reason:'Chiêu lừa phổ biến.' },
+            { text:'Bạn vừa thêm phương thức thanh toán mới.', label:'safe', reason:'Thông báo bảo mật.' },
+            { text:'Nhận quà sinh nhật miễn phí trị giá 10 triệu.', label:'scam', reason:'Mồi nhử nhận thưởng.' },
+            { text:'Mã OTP ngân hàng là 183927.', label:'safe', reason:'OTP thông thường.' },
+            { text:'Tài khoản liên quan vụ án ma túy.', label:'scam', reason:'Giả danh công an.' },
+            { text:'Thông báo lịch nghỉ lễ.', label:'safe', reason:'Thông báo hành chính.' },
+            { text:'Tải ứng dụng để nhận hoàn tiền.', label:'scam', reason:'Dẫn cài mã độc.' },
+            { text:'Đơn hàng đã được xác nhận.', label:'safe', reason:'Thông báo mua sắm.' }
+            ],
+
+            [
+            { text:'Bạn đã trúng 100 triệu từ chương trình tri ân.', label:'scam', reason:'Lừa đảo phần thưởng.' },
+            { text:'Apple gửi mã xác thực mới.', label:'safe', reason:'OTP hợp lệ.' },
+            { text:'Cập nhật tài khoản ngân hàng tại vcb-safe-login.cc', label:'scam', reason:'Tên miền giả.' },
+            { text:'Lịch học bù vào chiều thứ 7.', label:'safe', reason:'Thông báo trường học.' },
+            { text:'Công an yêu cầu chuyển tiền chứng minh vô tội.', label:'scam', reason:'Không có quy trình này.' },
+            { text:'Đăng nhập thành công vào Facebook.', label:'safe', reason:'Thông báo bảo mật.' },
+            { text:'Nhận việc online lương 3 triệu/ngày.', label:'scam', reason:'Lừa đảo việc làm.' },
+            { text:'Bạn vừa hủy đăng ký dịch vụ.', label:'safe', reason:'Thông báo hệ thống.' },
+            { text:'Xác thực CCCD qua Zalo.', label:'scam', reason:'Kênh xác thực giả.' },
+            { text:'Biến động số dư -50.000đ.', label:'safe', reason:'Thông báo giao dịch.' }
+            ],
+
+            [
+            { text:'Ngân hàng phát hiện giao dịch bất thường, nhập mật khẩu tại link.', label:'scam', reason:'Thu thập thông tin đăng nhập.' },
+            { text:'Mã OTP TikTok là 552811.', label:'safe', reason:'OTP hợp lệ.' },
+            { text:'Trúng thưởng xe Honda SH.', label:'scam', reason:'Lừa đảo nhận thưởng.' },
+            { text:'Bạn vừa đổi ảnh đại diện.', label:'safe', reason:'Thông báo hoạt động.' },
+            { text:'Nạp tiền để kích hoạt tài khoản nhận thưởng.', label:'scam', reason:'Phí nhận thưởng giả.' },
+            { text:'Đơn hàng Lazada đang được vận chuyển.', label:'safe', reason:'Thông báo hợp lệ.' },
+            { text:'Tải file xác minh VNeID.', label:'scam', reason:'Có thể chứa mã độc.' },
+            { text:'Lịch khám bệnh được xác nhận.', label:'safe', reason:'Thông báo dịch vụ.' },
+            { text:'Chuyển tiền vào tài khoản bảo chứng.', label:'scam', reason:'Chiêu lừa chuyển khoản.' },
+            { text:'Google xác nhận đăng nhập mới.', label:'safe', reason:'Thông báo bảo mật.' }
             ]
         ];
 
         let practiceIndex = 0, practiceScore = 0, currentPracticeSet = [], currentSetNumber = 0, answeredPractice = false;
+        let usedPracticeSets = [];
 
         function startPractice() {
-            practiceIndex = 0; practiceScore = 0; answeredPractice = false;
-            currentSetNumber = 1; currentPracticeSet = [...PRACTICE_SETS[0]];
+            practiceIndex = 0;
+            practiceScore = 0;
+            answeredPractice = false;
+
+            if (usedPracticeSets.length === PRACTICE_SETS.length) {
+                usedPracticeSets = [];
+            }
+
+            let available = [];
+            for (let i = 0; i < PRACTICE_SETS.length; i++) {
+                if (!usedPracticeSets.includes(i)) {
+                    available.push(i);
+                }
+            }
+
+            const randomSetIndex =
+                available[Math.floor(Math.random() * available.length)];
+
+            usedPracticeSets.push(randomSetIndex);
+
+            currentSetNumber = randomSetIndex + 1;
+
+            currentPracticeSet = [...PRACTICE_SETS[randomSetIndex]]
+                .sort(() => Math.random() - 0.5);
+
             renderPracticeQuestion();
         }
-
         function renderPracticeQuestion() {
             const area = document.getElementById('practiceArea');
             const q = currentPracticeSet[practiceIndex];
