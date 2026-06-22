@@ -89,9 +89,20 @@
         </div>
 
     </div>
-
-    <script src="config.js"></script>
+    
     <script>
+        const CONFIG = {
+            GROQ_API_KEY: "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"
+        };
+        const CO_TAM_LY_PROMPT = `
+            Bạn là "Cô tâm lý", một chuyên gia tư vấn tâm lý học hành vi chuyên hỗ trợ người cao tuổi phòng tránh lừa đảo mạng.
+            Nhiệm vụ của bạn: Phân tích tin nhắn mà người dùng cung cấp và giải thích ngắn gọn cơ chế/chiêu thức tác động tâm lý (thao túng, đánh vào lòng tham, nỗi sợ hãi, sự khẩn cấp) mà kẻ lừa đảo đang sử dụng để khiến họ suýt tin.
+
+            Yêu cầu nghiêm ngặt về phong cách:
+            1. Giọng điệu: Gần gũi, ấm áp, thấu hiểu, tuyệt đối KHÔNG hù dọa, KHÔNG lên giọng dạy dỗ hay chỉ trích người dùng.
+            2. Xưng hô: Bắt buộc xưng "cô" và gọi người dùng là "bác".
+            3. Độ dài: Chỉ viết trong khoảng từ ĐÚNG 2 ĐẾN 3 CÂU.
+        `;
         function switchTab(tabId) {
             document.getElementById('tab-home').classList.add('hidden');
             document.getElementById('tab-history').classList.add('hidden');
@@ -110,7 +121,7 @@
         const SYSTEM_PROMPT = "Bạn là Thám tử phân tích tin nhắn lừa đảo. Trả về ĐÚNG 1 khối JSON duy nhất theo mẫu định dạng sau không kèm giải thích gì thêm ngoài JSON: " +
         "{\"risk\": \"NGUY_HIEM\", \"title\": \"Nguy hiểm khẩn cấp\", \"desc\": \"Lý do chi tiết...\", \"signs\": [\"Dấu hiệu 1\", \"Dấu hiệu 2\"], \"quotes\": [\"từ khóa nguy hiểm 1\"], \"actions\": [\"Biện pháp ứng cứu 1\"]}";
 
-        const CO_TAM_LY_PROMPT = "Bạn là một chuyên gia tâm lý học hành vi độc lập. Hãy phân tích tin nhắn lừa đảo sau đây và giải thích thật ngắn gọn trong khoảng 1 đến 2 câu bằng tiếng Việt xem kẻ lừa đảo đang đánh vào tâm lý nào của nạn nhân (ví dụ: nỗi sợ hãi cơ quan luật pháp, lòng tham phần thưởng lớn, hay áp lực thời gian khẩn cấp) để thao túng họ. Hãy dùng giọng điệu đồng cảm, nhẹ nhàng.";
+        //const CO_TAM_LY_PROMPT = "Bạn là một chuyên gia tâm lý học hành vi độc lập. Hãy phân tích tin nhắn lừa đảo sau đây và giải thích thật ngắn gọn trong khoảng 1 đến 2 câu bằng tiếng Việt xem kẻ lừa đảo đang đánh vào tâm lý nào của nạn nhân (ví dụ: nỗi sợ hãi cơ quan luật pháp, lòng tham phần thưởng lớn, hay áp lực thời gian khẩn cấp) để thao túng họ. Hãy dùng giọng điệu đồng cảm, nhẹ nhàng.";
 
         function cleanJsonText(text) {
             let t = String(text || '').trim();
@@ -172,48 +183,60 @@
             });
 
             try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${CONFIG.GEMINI_API_KEY}`, {
+                // Lần gọi 1: Phân tích lừa đảo bằng API Groq (Trả về JSON)
+                const response = await fetch(`https://api.groq.com/openai/v1/chat/completions`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${CONFIG.GROQ_API_KEY}`
+                    },
                     body: JSON.stringify({
-                        contents: [
-                            { parts: [{ text: SYSTEM_PROMPT + "\n\nTin nhắn cần phân tích thực tế từ người dùng:\n\"" + originalText + "\"" }] }
-                        ],
-                        generationConfig: {
-                            responseMimeType: "application/json"
-                        }
+                        model: "llama-3.3-70b-versatile",
+                        response_format: { type: "json_object" },
+                        messages: [
+                            { role: "system", content: SYSTEM_PROMPT },
+                            { role: "user", content: "Tin nhắn cần phân tích thực tế từ người dùng:\n\"" + originalText + "\"" }
+                        ]
                     })
                 });
 
                 const data = await response.json();
-                if (!data?.candidates?.length) throw new Error('No candidates');
-                if (data.candidates[0].finishReason && data.candidates[0].finishReason !== 'STOP') throw new Error('AI refused to answer');
+                if (!data?.choices?.length) throw new Error('No candidates');
+                if (data.choices[0].finish_reason && data.choices[0].finish_reason !== 'stop') throw new Error('AI refused to answer');
 
-                const rawText = data.candidates[0]?.content?.parts?.[0]?.text || '';
+                const rawText = data.choices[0]?.message?.content || '';
                 const aiText = cleanJsonText(rawText);
                 finalResult = normalizeResult(JSON.parse(aiText));
 
                 finalResult.coTamLyText = null;
 
+                // Lần gọi 2: Phân tích tâm lý bằng API Groq (Trả về Text thông thường)
                 if (finalResult.risk === 'NGHI_NGO' || finalResult.risk === 'NGUY_HIEM') {
                     try {
-                        const responseCoTamLy = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${CONFIG.GEMINI_API_KEY}`, {
+                        const responseCoTamLy = await fetch(`https://api.groq.com/openai/v1/chat/completions`, {
                             method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
+                            headers: { 
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${CONFIG.GROQ_API_KEY}`
+                            },
                             body: JSON.stringify({
-                                contents: [{ parts: [{ text: CO_TAM_LY_PROMPT + "\n\nTin nhắn cần phân tích: \"" + originalText + "\"" }] }]
+                                model: "llama-3.3-70b-versatile",
+                                messages: [
+                                    { role: "system", content: CO_TAM_LY_PROMPT },
+                                    { role: "user", content: "Tin nhắn cần phân tích:\n\"" + originalText + "\"" }
+                                ]
                             })
                         });
                         const dataCoTamLy = await responseCoTamLy.json();
-                        const txt = dataCoTamLy?.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+                        const txt = dataCoTamLy?.choices?.[0]?.message?.content?.trim();
                         if (txt) finalResult.coTamLyText = txt;
                     } catch (coTamLyError) {
-                        console.error(coTamLyError);
+                        console.error("Lỗi khi gọi API Tâm lý:", coTamLyError);
                         finalResult.coTamLyText = 'Cô tâm lý hiện đang bận hỗ trợ các bác khác một chút, bác hãy thử lại sau nhé!';
                     }
                 }
             } catch (error) {
-                console.error(error);
+                console.error("Lỗi khi gọi API Groq:", error);
                 finalResult.desc = 'Hệ thống AI gặp lỗi xử lý dữ liệu. Bác hãy tạm thời nâng cao cảnh giác nhé!';
             } finally {
                 btn.disabled = false;
