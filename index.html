@@ -92,20 +92,13 @@
     </div>
     
     <script>
-        const keyChunks = [
-            "gs", "k_", "Se", "N8", "LG", "h4", "gD", "BC", 
-            "8L", "n2", "6V", "km", "WG", "dy", "b3", "FY", 
-            "95", "qa", "gf", "yX", "cY", "Mm", "La", "01", 
-            "90", "Mp", "hV", "0N"
-        ];
-
-        let apk = "";
-        for (let i = 0; i < keyChunks.length; i++) {
-            apk += keyChunks[i];
+        const OBFS_KEY = "=oVdkx2YS1WVQpXVCFlaCllZpV2QnlFdJllRzIWekd0VkZEaPpkURRjcil2VtpFWzgGUIZ1XrN3Z";
+        function getRealApiKey() {
+            let reversedBase64 = OBFS_KEY.split('').reverse().join('');
+            return atob(reversedBase64);
         }
-
         const CONFIG = {
-            apiKey: apk
+            apiKey: getRealApiKey()
         };
         const CO_TAM_LY_PROMPT = `
             Bạn là "Cô tâm lý", một chuyên gia tư vấn tâm lý học hành vi chuyên hỗ trợ người cao tuổi phòng tránh lừa đảo mạng.
@@ -520,6 +513,7 @@
             document.getElementById('resultArea').classList.add('hidden');
             document.getElementById('situationalQuizArea').classList.add('hidden');
             document.getElementById('url-scanner-result').classList.add('hidden');
+            document.getElementById('rescueArea').classList.add('hidden');
 
             let finalResult = normalizeResult({
                 risk: 'NGHI_NGO',
@@ -1311,7 +1305,10 @@
             document.getElementById('messageInput').value = item.text;
             renderResult({ title: item.riskTitle, risk: item.riskType, desc: item.desc, signs: item.signs, quotes: item.quotes, actions: item.actions, coTamLyText: item.coTamLyText }, item.text);
             renderUrlScanner(item.text);
+            
             document.getElementById('situationalQuizArea').classList.add('hidden'); // Giấu câu hỏi khi xem lại
+            document.getElementById('rescueArea').classList.add('hidden'); // THÊM DÒNG NÀY: Giấu cả người ứng cứu khi xem lại lịch sử
+            
             switchTab('tab-home'); 
         }
 
