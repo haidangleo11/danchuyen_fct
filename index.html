@@ -5,17 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ScamCheck - An toàn không gian số</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Cấu hình chế độ Dark Mode cho Tailwind
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
 </head>
-<body class="bg-gray-100 min-h-screen font-sans">
+<body class="bg-gray-100 dark:bg-gray-950 min-h-screen font-sans text-gray-900 dark:text-gray-100 transition-colors duration-300">
 
     <!-- Wrapper chính: Chuyển sang dạng Flex ngang trên màn hình lớn (PC) -->
-    <div class="w-full md:max-w-7xl mx-auto bg-white shadow-xl relative pb-20 md:pb-0 flex flex-col md:flex-row min-h-screen md:min-h-0 md:h-screen">
+    <div class="w-full md:max-w-7xl mx-auto bg-white dark:bg-gray-900 shadow-xl relative pb-20 md:pb-0 flex flex-col md:flex-row min-h-screen md:min-h-0 md:h-screen transition-colors duration-300">
         
         <!-- Sidebar Menu cho PC / Bottom Nav cho Mobile -->
-        <nav class="fixed bottom-0 md:relative md:bottom-auto md:w-72 w-full bg-white border-t md:border-t-0 md:border-r border-gray-300 flex flex-row md:flex-col justify-around md:justify-start text-gray-500 z-50 md:h-full md:overflow-y-auto">
+        <nav class="fixed bottom-0 md:relative md:bottom-auto md:w-72 w-full bg-white dark:bg-gray-900 border-t md:border-t-0 md:border-r border-gray-300 dark:border-gray-800 flex flex-row md:flex-col justify-around md:justify-start text-gray-500 dark:text-gray-400 z-50 md:h-full md:overflow-y-auto transition-colors duration-300">
             
             <!-- Logo chỉ hiển thị trên PC bên trong Sidebar -->
-            <div class="hidden md:flex flex-col items-center justify-center p-6 border-b-2 border-slate-100 mb-4">
+            <div class="hidden md:flex flex-col items-center justify-center p-6 border-b-2 border-slate-100 dark:border-gray-800 mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" class="w-full h-auto transition-transform hover:scale-105 duration-300">
                     <defs>
                         <linearGradient id="shieldGradPC" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -26,33 +32,40 @@
                     <path d="M50 15 L95 25 V55 C95 85 70 105 50 115 C30 105 5 85 5 55 V25 Z" fill="url(#shieldGradPC)" />
                     <path d="M25 60 L40 75 L75 35" fill="none" stroke="#ffffff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
                     <text x="115" y="72" font-family="system-ui, -apple-system, sans-serif" font-size="52" font-weight="900" letter-spacing="-1">
-                        <tspan fill="#1e3a8a">Scam</tspan><tspan fill="#2563eb">Check</tspan>
+                        <tspan class="fill-[#1e3a8a] dark:fill-[#60a5fa]">Scam</tspan><tspan class="fill-[#2563eb] dark:fill-[#3b82f6]">Check</tspan>
                     </text>
-                    <text x="120" y="98" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#64748b" letter-spacing="1.2">
+                    <text x="120" y="98" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" class="fill-[#64748b] dark:fill-[#94a3b8]" letter-spacing="1.2">
                         AN TOÀN KHÔNG GIAN SỐ
                     </text>
                 </svg>
             </div>
 
+            <!-- Nút đổi chế độ sáng/tối trên PC -->
+            <div class="hidden md:flex px-6 mb-4">
+                <button onclick="toggleDarkMode()" class="w-full py-2.5 px-4 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-semibold text-sm transition-colors flex items-center justify-center gap-2 border border-gray-200 dark:border-gray-700 shadow-sm">
+                    <span class="theme-icon">🌙</span> <span class="theme-text">Chế độ tối</span>
+                </button>
+            </div>
+
             <!-- Các nút điều hướng -->
-            <button onclick="switchTab('tab-home')" class="flex-1 md:flex-none py-3 md:py-4 hover:text-blue-600 hover:bg-blue-50 transition flex flex-col md:flex-row items-center md:px-6 md:gap-3 md:justify-start md:border-b md:border-gray-100">
+            <button onclick="switchTab('tab-home')" class="flex-1 md:flex-none py-3 md:py-4 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-800 transition flex flex-col md:flex-row items-center md:px-6 md:gap-3 md:justify-start md:border-b md:border-gray-100 dark:md:border-gray-800">
                 <span class="text-2xl">🏠</span>
                 <span class="text-sm md:text-base font-semibold mt-1 md:mt-0">Trang chủ</span>
             </button>
-            <button onclick="switchTab('tab-history')" class="flex-1 md:flex-none py-3 md:py-4 border-l md:border-l-0 border-gray-200 hover:text-blue-600 hover:bg-blue-50 transition flex flex-col md:flex-row items-center md:px-6 md:gap-3 md:justify-start md:border-b md:border-gray-100">
+            <button onclick="switchTab('tab-history')" class="flex-1 md:flex-none py-3 md:py-4 border-l md:border-l-0 border-gray-200 dark:border-gray-800 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-800 transition flex flex-col md:flex-row items-center md:px-6 md:gap-3 md:justify-start md:border-b md:border-gray-100 dark:md:border-gray-800">
                 <span class="text-2xl">🕒</span>
-                <span class="text-sm md:text-base font-semibold mt-1 md:mt-0">Lịch sử</span>
+                <span class="text-sm md:text-base font-semibold mt-1 md:mt-0">Lịch sử & Logs</span>
             </button>
-            <button onclick="switchTab('tab-library')" class="flex-1 md:flex-none py-3 md:py-4 border-l md:border-l-0 border-gray-200 hover:text-blue-600 hover:bg-blue-50 transition flex flex-col md:flex-row items-center md:px-6 md:gap-3 md:justify-start md:border-b md:border-gray-100">
+            <button onclick="switchTab('tab-library')" class="flex-1 md:flex-none py-3 md:py-4 border-l md:border-l-0 border-gray-200 dark:border-gray-800 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-800 transition flex flex-col md:flex-row items-center md:px-6 md:gap-3 md:justify-start md:border-b md:border-gray-100 dark:md:border-gray-800">
                 <span class="text-2xl">📚</span>
                 <span class="text-sm md:text-base font-semibold mt-1 md:mt-0">Thư viện</span>
             </button>
-            <button onclick="switchTab('tab-practice')" class="flex-1 md:flex-none py-3 md:py-4 border-l md:border-l-0 border-gray-200 hover:text-blue-600 hover:bg-blue-50 transition flex flex-col md:flex-row items-center md:px-6 md:gap-3 md:justify-start md:border-b md:border-gray-100">
+            <button onclick="switchTab('tab-practice')" class="flex-1 md:flex-none py-3 md:py-4 border-l md:border-l-0 border-gray-200 dark:border-gray-800 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-800 transition flex flex-col md:flex-row items-center md:px-6 md:gap-3 md:justify-start md:border-b md:border-gray-100 dark:md:border-gray-800">
                 <span class="text-2xl">🎯</span>
                 <span class="text-sm md:text-base font-semibold mt-1 md:mt-0">Luyện tập</span>
             </button>
             
-            <div class="hidden md:block mt-auto p-4 text-[12px] text-gray-400 text-center border-t border-gray-100">
+            <div class="hidden md:block mt-auto p-4 text-[12px] text-gray-400 dark:text-gray-500 text-center border-t border-gray-100 dark:border-gray-800">
                 ScamCheck © Nhóm phát triển 2024
             </div>
         </nav>
@@ -61,7 +74,7 @@
         <div class="flex-grow flex flex-col h-full md:overflow-y-auto w-full relative">
             
             <!-- Logo hiển thị trên Mobile -->
-            <div class="bg-white border-b-2 border-slate-100 p-6 flex flex-col items-center justify-center md:hidden">
+            <div class="bg-white dark:bg-gray-900 border-b-2 border-slate-100 dark:border-gray-800 p-6 flex items-center justify-between md:hidden transition-colors duration-300">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" class="w-full h-auto max-w-[220px] transition-transform hover:scale-105 duration-300">
                     <defs>
                         <linearGradient id="shieldGradMobile" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -72,42 +85,70 @@
                     <path d="M50 15 L95 25 V55 C95 85 70 105 50 115 C30 105 5 85 5 55 V25 Z" fill="url(#shieldGradMobile)" />
                     <path d="M25 60 L40 75 L75 35" fill="none" stroke="#ffffff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
                     <text x="115" y="72" font-family="system-ui, -apple-system, sans-serif" font-size="52" font-weight="900" letter-spacing="-1">
-                        <tspan fill="#1e3a8a">Scam</tspan><tspan fill="#2563eb">Check</tspan>
+                        <tspan class="fill-[#1e3a8a] dark:fill-[#60a5fa]">Scam</tspan><tspan class="fill-[#2563eb] dark:fill-[#3b82f6]">Check</tspan>
                     </text>
-                    <text x="120" y="98" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#64748b" letter-spacing="1.2">
+                    <text x="120" y="98" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" class="fill-[#64748b] dark:fill-[#94a3b8]" letter-spacing="1.2">
                         AN TOÀN KHÔNG GIAN SỐ
                     </text>
                 </svg>
+                
+                <!-- Nút đổi chế độ sáng/tối trên Mobile -->
+                <button onclick="toggleDarkMode()" class="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-xl border border-gray-200 dark:border-gray-700 shadow-sm transition-colors">
+                    <span class="theme-icon">🌙</span>
+                </button>
             </div>
 
             <main class="flex-grow p-4 md:p-8 lg:p-10 w-full max-w-5xl mx-auto">
                 <section id="tab-home" class="space-y-4">
-                    <label class="block text-gray-800 font-semibold text-lg md:text-xl">
+                    <!-- HẠN MỨC GỌI AI TRONG PHIÊN (L1-07) -->
+                    <div id="aiLimitWidget" class="bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all duration-300">
+                        <div class="flex items-center gap-2.5">
+                            <span class="text-2xl animate-pulse">⚡</span>
+                            <div>
+                                <h4 class="font-bold text-blue-900 dark:text-blue-300 text-sm">Hạn mức tài nguyên AI trong phiên</h4>
+                                <p class="text-xs text-blue-700 dark:text-blue-400 mt-0.5">Để bảo vệ hệ thống khỏi spam, mỗi người dùng có tối đa 15 lượt gọi AI/phiên.</p>
+                            </div>
+                        </div>
+                        <div class="w-full sm:w-48">
+                            <div class="flex justify-between items-center mb-1 text-xs font-semibold text-blue-800 dark:text-blue-300">
+                                <span id="aiUsageLabel">Sử dụng: 0/15</span>
+                                <span id="aiUsagePercent">0%</span>
+                            </div>
+                            <div class="w-full bg-blue-200 dark:bg-blue-900 h-2.5 rounded-full overflow-hidden">
+                                <div id="aiUsageBar" class="bg-blue-600 dark:bg-blue-400 h-full transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <label class="block text-gray-800 dark:text-gray-200 font-semibold text-lg md:text-xl">
                         Dán tin nhắn nghi ngờ vào đây:
                     </label>
-                    <div class="relative w-full">
-                        <textarea id="messageInput" rows="6" class="w-full p-4 pr-16 border-2 border-gray-300 rounded-xl focus:border-blue-500 outline-none text-lg md:text-xl resize-y" placeholder="Dán tin nhắn hoặc bấm icon micro góc phải để nhập bằng giọng nói..."></textarea>
+                    <div class="relative w-full overflow-hidden rounded-xl">
+                        <textarea id="messageInput" rows="6" class="w-full p-4 pr-16 border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:border-blue-500 dark:focus:border-blue-400 outline-none text-lg md:text-xl resize-y transition-colors duration-300" placeholder="Dán tin nhắn hoặc bấm icon micro góc phải để nhập bằng giọng nói..."></textarea>
+                        
+                        <!-- Hiệu ứng quét / Swiping Laser Effect -->
+                        <div id="swipeScanner" class="absolute left-0 w-full h-1 bg-blue-500 dark:bg-blue-400 shadow-[0_0_15px_#3b82f6] opacity-0 pointer-events-none z-20"></div>
+                        
                         <!-- Nút thu âm Speech to Text -->
-                        <button id="micBtn" onclick="toggleSpeechRecognition()" class="absolute right-3 top-3 w-12 h-12 flex items-center justify-center bg-gray-50 text-2xl text-gray-500 rounded-full border border-gray-200 hover:text-blue-600 hover:bg-blue-50 hover:border-blue-300 transition-all shadow-sm z-10" title="Nhập bằng giọng nói">
+                        <button id="micBtn" onclick="toggleSpeechRecognition()" class="absolute right-3 top-3 w-12 h-12 flex items-center justify-center bg-gray-50 dark:bg-gray-700 text-2xl text-gray-500 dark:text-gray-300 rounded-full border border-gray-200 dark:border-gray-600 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-600 hover:border-blue-300 transition-all shadow-sm z-10" title="Nhập bằng giọng nói">
                             🎤
                         </button>
                     </div>
 
                     <div class="flex flex-wrap gap-2 md:gap-3 mt-3 mb-4">
-                        <button type="button" onclick="fillSample('bank')" class="bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-lg text-sm md:text-base font-medium transition-colors">🏦 Mẫu: Ngân hàng</button>
-                        <button type="button" onclick="fillSample('police')" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm md:text-base font-medium transition-colors">👮 Mẫu: Công an</button>
-                        <button type="button" onclick="fillSample('lottery')" class="bg-green-100 hover:bg-green-200 text-green-700 px-4 py-2 rounded-lg text-sm md:text-base font-medium transition-colors">🎁 Mẫu: Trúng thưởng</button>
+                        <button type="button" onclick="fillSample('bank')" class="bg-blue-100 dark:bg-blue-950/50 hover:bg-blue-200 dark:hover:bg-blue-900 text-blue-700 dark:text-blue-300 px-4 py-2 rounded-lg text-sm md:text-base font-medium transition-colors">🏦 Mẫu: Ngân hàng</button>
+                        <button type="button" onclick="fillSample('police')" class="bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg text-sm md:text-base font-medium transition-colors">👮 Mẫu: Công an</button>
+                        <button type="button" onclick="fillSample('lottery')" class="bg-green-100 dark:bg-green-950/50 hover:bg-green-200 dark:hover:bg-green-900 text-green-700 dark:text-green-300 px-4 py-2 rounded-lg text-sm md:text-base font-medium transition-colors">🎁 Mẫu: Trúng thưởng</button>
                     </div>
                                     
-                    <!-- Đã bỏ md:w-auto, nút sẽ full 100% width trên mọi màn hình -->
-                    <button id="checkBtn" class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl text-xl hover:bg-blue-700 shadow-md transition-all active:scale-95">
+                    <button id="checkBtn" class="w-full bg-blue-600 dark:bg-blue-500 text-white font-bold py-4 rounded-xl text-xl hover:bg-blue-700 dark:hover:bg-blue-600 shadow-md transition-all active:scale-95">
                         🔍 Kiểm tra ngay
                     </button>
 
                     <div id="resultArea" class="hidden mt-6 space-y-4"></div>
                     <!-- Responsive Grid cho các kết quả bổ sung trên PC -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                        <div id="situationalQuizArea" class="hidden p-4 bg-white border border-gray-200 rounded-xl shadow-sm space-y-3 h-fit"></div>
+                        <div id="situationalQuizArea" class="hidden p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm space-y-3 h-fit"></div>
                         <div class="space-y-4">
                             <div id="url-scanner-result" class="hidden p-4 rounded-xl border transition-all h-fit"></div>
                             <div id="rescueArea" class="hidden h-fit"></div>
@@ -115,27 +156,57 @@
                     </div>
                 </section>
 
-                <section id="tab-history" class="hidden space-y-4">
-                    <div class="flex justify-between items-center border-b pb-3">
-                        <h2 class="text-xl md:text-2xl font-bold text-gray-800">Lịch sử kiểm tra</h2>
-                        <button onclick="clearHistory()" class="text-red-600 hover:text-red-800 text-sm font-semibold px-3 py-1 bg-red-50 hover:bg-red-100 rounded-lg transition-colors">Xóa tất cả</button>
+                <section id="tab-history" class="hidden space-y-6">
+                    <div class="flex justify-between items-center border-b dark:border-gray-800 pb-3">
+                        <h2 class="text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-200">Lịch sử kiểm tra</h2>
+                        <button onclick="clearHistory()" class="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 text-sm font-semibold px-3 py-1 bg-red-50 dark:bg-red-950/30 hover:bg-red-100 dark:hover:bg-red-900/50 rounded-lg transition-colors border border-red-100 dark:border-red-900/30">Xóa tất cả</button>
                     </div>
                     <!-- Áp dụng Grid trên màn hình lớn cho lịch sử -->
                     <div id="historyList" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <p class="text-gray-600 text-lg md:col-span-2">Chưa có tin nhắn nào được kiểm tra gần đây.</p>
+                        <p class="text-gray-600 dark:text-gray-400 text-lg md:col-span-2">Chưa có tin nhắn nào được kiểm tra gần đây.</p>
+                    </div>
+
+                    <!-- L1-08: NHẬT KÝ GỌI AI CHI TIẾT (LATENCY & TOKEN ANALYTICS LOGS) -->
+                    <div class="border-t dark:border-gray-800 pt-6 space-y-4">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div>
+                                <h3 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200">Nhật ký đo lường & Giám sát AI (Cấp 4)</h3>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Theo dõi thời gian phản hồi (latency), số lượng ký tự đầu vào và ước tính số lượng Token đã xử lý thực tế.</p>
+                            </div>
+                            <button onclick="clearAiLogs()" class="text-gray-600 dark:text-gray-400 hover:text-red-500 text-xs font-semibold px-2.5 py-1.5 bg-gray-100 dark:bg-gray-800 rounded-lg transition-colors border border-gray-200 dark:border-gray-700">Xóa Logs</button>
+                        </div>
+                        <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
+                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-800 text-left text-sm text-gray-600 dark:text-gray-400">
+                                <thead class="bg-gray-50 dark:bg-gray-950 text-gray-700 dark:text-gray-300 font-bold">
+                                    <tr>
+                                        <th scope="col" class="px-4 py-3">Thời điểm</th>
+                                        <th scope="col" class="px-4 py-3">Độ dài (Ký tự)</th>
+                                        <th scope="col" class="px-4 py-3">Est. Tokens</th>
+                                        <th scope="col" class="px-4 py-3">Độ trễ (Latency)</th>
+                                        <th scope="col" class="px-4 py-3">Kết quả / Tóm tắt</th>
+                                        <th scope="col" class="px-4 py-3 text-right">Trạng thái</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="aiLogsTableBody" class="divide-y divide-gray-200 dark:divide-gray-800 bg-white dark:bg-gray-900">
+                                    <tr>
+                                        <td colspan="6" class="px-4 py-8 text-center text-gray-400 italic">Chưa có dữ liệu vận hành AI được ghi nhận.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </section>
 
                 <section id="tab-library" class="hidden space-y-4 w-full">
-                    <h2 class="text-xl md:text-2xl font-bold text-gray-800 border-b pb-3">Thư viện & Ứng cứu khẩn cấp</h2>
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-200 border-b dark:border-gray-800 pb-3">Thư viện & Ứng cứu khẩn cấp</h2>
                     
-                    <div class="flex flex-wrap gap-2 pb-4 border-b border-gray-100">
+                    <div class="flex flex-wrap gap-2 pb-4 border-b border-gray-100 dark:border-gray-800">
                         <button onclick="filterLibrary('all')" id="btn-filter-all" class="filter-btn bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition">Tất cả</button>
-                        <button onclick="filterLibrary('bank')" id="btn-filter-bank" class="filter-btn bg-gray-100 text-gray-600 hover:bg-gray-200 px-4 py-2 rounded-lg text-sm font-semibold transition">🏦 Ngân hàng</button>
-                        <button onclick="filterLibrary('police')" id="btn-filter-police" class="filter-btn bg-gray-100 text-gray-600 hover:bg-gray-200 px-4 py-2 rounded-lg text-sm font-semibold transition">👮 Công an</button>
-                        <button onclick="filterLibrary('lottery')" id="btn-filter-lottery" class="filter-btn bg-gray-100 text-gray-600 hover:bg-gray-200 px-4 py-2 rounded-lg text-sm font-semibold transition">🎁 Thưởng</button>
-                        <button onclick="filterLibrary('delivery')" id="btn-filter-delivery" class="filter-btn bg-gray-100 text-gray-600 hover:bg-gray-200 px-4 py-2 rounded-lg text-sm font-semibold transition">📦 Giao hàng</button>
-                        <button onclick="filterLibrary('hotline')" id="btn-filter-hotline" class="filter-btn bg-gray-100 text-gray-600 hover:bg-gray-200 px-4 py-2 rounded-lg text-sm font-semibold transition">📞 Tổng đài khẩn cấp</button>
+                        <button onclick="filterLibrary('bank')" id="btn-filter-bank" class="filter-btn bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 px-4 py-2 rounded-lg text-sm font-semibold transition">🏦 Ngân hàng</button>
+                        <button onclick="filterLibrary('police')" id="btn-filter-police" class="filter-btn bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 px-4 py-2 rounded-lg text-sm font-semibold transition">👮 Công an</button>
+                        <button onclick="filterLibrary('lottery')" id="btn-filter-lottery" class="filter-btn bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 px-4 py-2 rounded-lg text-sm font-semibold transition">🎁 Thưởng</button>
+                        <button onclick="filterLibrary('delivery')" id="btn-filter-delivery" class="filter-btn bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 px-4 py-2 rounded-lg text-sm font-semibold transition">📦 Giao hàng</button>
+                        <button onclick="filterLibrary('hotline')" id="btn-filter-hotline" class="filter-btn bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 px-4 py-2 rounded-lg text-sm font-semibold transition">📞 Tổng đài khẩn cấp</button>
                     </div>
 
                     <!-- Áp dụng Grid để chia đôi cột trên PC -->
@@ -143,13 +214,13 @@
                 </section>
 
                 <section id="tab-practice" class="hidden space-y-4">
-                    <h2 class="text-xl md:text-2xl font-bold text-gray-800 border-b pb-3">Chế độ luyện tập</h2>
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-200 border-b dark:border-gray-800 pb-3">Chế độ luyện tập</h2>
                     <div id="practiceArea" class="w-full max-w-2xl mx-auto mt-4"></div>
                 </section>
             </main>
 
             <!-- Cảnh báo chân trang (Chỉ hiện trên Mobile, PC đã đưa vào Sidebar) -->
-            <div class="md:hidden block mt-auto w-full bg-gray-100 text-center text-[13px] text-gray-500 p-3 border-t border-gray-200 pb-[80px]">
+            <div class="md:hidden block mt-auto w-full bg-gray-100 dark:bg-gray-950 text-center text-[13px] text-gray-500 dark:text-gray-400 p-3 border-t border-gray-200 dark:border-gray-800 pb-[80px] transition-colors duration-300">
                 ScamCheck là công cụ giáo dục. Đánh giá của ứng dụng không thay thế cảnh báo chính thức từ cơ quan chức năng.
             </div>
         </div>
@@ -167,6 +238,192 @@
             apiKey: getRealApiKey()
         };
 
+        // --- L1-07: QUẢN LÝ HẠN MỨC GỌI AI TRONG MỘT PHIÊN (SESSION RATE LIMITER) ---
+        const MAX_SESSION_LIMIT = 15;
+        function getAiUsageCount() {
+            let usage = sessionStorage.getItem('ai_usage_count');
+            return usage ? parseInt(usage, 10) : 0;
+        }
+
+        function incrementAiUsage() {
+            let usage = getAiUsageCount();
+            usage++;
+            sessionStorage.setItem('ai_usage_count', usage);
+            updateAiLimitUI();
+            return usage;
+        }
+
+        function checkAiLimit() {
+            if (getAiUsageCount() >= MAX_SESSION_LIMIT) {
+                return false;
+            }
+            return true;
+        }
+
+        function updateAiLimitUI() {
+            const usage = getAiUsageCount();
+            const percent = Math.min((usage / MAX_SESSION_LIMIT) * 100, 100);
+            
+            const label = document.getElementById('aiUsageLabel');
+            const pct = document.getElementById('aiUsagePercent');
+            const bar = document.getElementById('aiUsageBar');
+            const widget = document.getElementById('aiLimitWidget');
+
+            if (label) label.textContent = `Sử dụng: ${usage}/${MAX_SESSION_LIMIT}`;
+            if (pct) pct.textContent = `${Math.round(percent)}%`;
+            if (bar) {
+                bar.style.width = `${percent}%`;
+                if (usage >= MAX_SESSION_LIMIT) {
+                    bar.className = "bg-red-600 dark:bg-red-500 h-full transition-all duration-500";
+                    if (widget) {
+                        widget.className = "bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all duration-300";
+                    }
+                } else if (usage >= MAX_SESSION_LIMIT * 0.7) {
+                    bar.className = "bg-yellow-500 dark:bg-yellow-400 h-full transition-all duration-500";
+                    if (widget) {
+                        widget.className = "bg-yellow-50 dark:bg-yellow-950/40 border border-yellow-200 dark:border-yellow-900 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all duration-300";
+                    }
+                } else {
+                    bar.className = "bg-blue-600 dark:bg-blue-400 h-full transition-all duration-500";
+                    if (widget) {
+                        widget.className = "bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all duration-300";
+                    }
+                }
+            }
+        }
+
+        // --- L1-08: HỆ THỐNG GHI NHẬT KÝ QUY MÔ LỚN (AI LOGGING & TRACKING SYSTEM) ---
+        function writeAiLog(inputLength, responseLatency, resultSummary, isSuccess) {
+            let logs = JSON.parse(localStorage.getItem('scamCheckAiLogs')) || [];
+            
+            // Ước tính số lượng Token (Tiêu chuẩn 1 token Việt khoảng 2-3 ký tự tùy thuộc mật độ dấu)
+            const estimatedTokens = Math.ceil(inputLength / 2.5);
+
+            const logEntry = {
+                timestamp: new Date().toLocaleString('vi-VN'),
+                inputLength: inputLength,
+                estimatedTokens: estimatedTokens,
+                latency: responseLatency,
+                summary: resultSummary,
+                isSuccess: isSuccess
+            };
+
+            logs.unshift(logEntry);
+            if (logs.length > 50) logs.pop(); // Giới hạn lưu 50 dòng log gần nhất để tránh tràn dung lượng localStorage
+            localStorage.setItem('scamCheckAiLogs', JSON.stringify(logs));
+            renderAiLogs();
+        }
+
+        function renderAiLogs() {
+            const tbody = document.getElementById('aiLogsTableBody');
+            if (!tbody) return;
+
+            let logs = JSON.parse(localStorage.getItem('scamCheckAiLogs')) || [];
+            if (logs.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="px-4 py-8 text-center text-gray-400 italic">Chưa có dữ liệu vận hành AI được ghi nhận.</td>
+                    </tr>`;
+                return;
+            }
+
+            let html = "";
+            logs.forEach(log => {
+                const statusColor = log.isSuccess 
+                    ? "bg-green-100 text-green-800 dark:bg-green-950/40 dark:text-green-300" 
+                    : "bg-red-100 text-red-800 dark:bg-red-950/40 dark:text-red-300";
+                const statusText = log.isSuccess ? "Thành công" : "Thất bại";
+                
+                html += `
+                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/40 transition-colors">
+                        <td class="px-4 py-3.5 font-mono text-xs whitespace-nowrap text-gray-500 dark:text-gray-400">${log.timestamp}</td>
+                        <td class="px-4 py-3.5 font-semibold text-gray-800 dark:text-gray-200">${log.inputLength.toLocaleString()}</td>
+                        <td class="px-4 py-3.5 text-gray-600 dark:text-gray-400">${log.estimatedTokens.toLocaleString()}</td>
+                        <td class="px-4 py-3.5 font-mono text-blue-600 dark:text-blue-400 font-semibold">${log.latency.toFixed(0)} ms</td>
+                        <td class="px-4 py-3.5 text-gray-700 dark:text-gray-300 max-w-xs truncate" title="${log.summary}">${log.summary}</td>
+                        <td class="px-4 py-3.5 text-right whitespace-nowrap">
+                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold ${statusColor}">
+                                ${statusText}
+                            </span>
+                        </td>
+                    </tr>`;
+            });
+            tbody.innerHTML = html;
+        }
+
+        function clearAiLogs() {
+            if (confirm("Bác có chắc muốn xóa tất cả dữ liệu đo lường kỹ thuật này không?")) {
+                localStorage.removeItem('scamCheckAiLogs');
+                renderAiLogs();
+            }
+        }
+
+        // --- L1-05: CƠ CHẾ FETCH CÓ KIỂM SOÁT THỬ LẠI KHI BỊ CHẶN TẦN SUẤT (EXPONENTIAL BACKOFF RETRY) ---
+        async function fetchWithExponentialBackoff(url, options, maxRetries = 3, baseDelay = 1000) {
+            let attempt = 0;
+            while (attempt < maxRetries) {
+                try {
+                    const response = await fetch(url, options);
+                    
+                    // Nếu gặp mã lỗi 429 (Rate Limit), tiến hành tính toán thời gian chờ và thử lại
+                    if (response.status === 429) {
+                        attempt++;
+                        if (attempt >= maxRetries) {
+                            return response; // Hết số lần thử, trả về phản hồi lỗi gốc cho module gọi xử lý tiếp
+                        }
+                        
+                        // Áp dụng công thức Exponential Backoff kết hợp Jitter ngẫu nhiên
+                        const delay = baseDelay * Math.pow(2, attempt) + (Math.random() * 300);
+                        console.warn(`[API] Phát hiện lỗi 429 Rate Limit. Tiến hành thử lại lần thứ ${attempt}/${maxRetries} sau ${Math.round(delay)}ms...`);
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        continue;
+                    }
+                    
+                    return response;
+                } catch (error) {
+                    // Xử lý khi lỗi phần cứng, mất kết nối mạng hoặc treo cổng mạng
+                    attempt++;
+                    if (attempt >= maxRetries) {
+                        throw error;
+                    }
+                    const delay = baseDelay * Math.pow(2, attempt) + (Math.random() * 300);
+                    console.warn(`[API Network Error] Đã xảy ra lỗi kết nối. Thử lại lần thứ ${attempt}/${maxRetries} sau ${Math.round(delay)}ms... Lỗi chi tiết:`, error);
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+        }
+
+
+        // --- HỆ THỐNG GIAO DIỆN SÁNG / TỐI (LIGHT & DARK MODE) ---
+        function initTheme() {
+            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+            updateThemeUI();
+        }
+
+        function toggleDarkMode() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            updateThemeUI();
+        }
+
+        function updateThemeUI() {
+            const isDark = document.documentElement.classList.contains('dark');
+            document.querySelectorAll('.theme-icon').forEach(el => el.textContent = isDark ? '☀️' : '🌙');
+            document.querySelectorAll('.theme-text').forEach(el => el.textContent = isDark ? 'Chế độ sáng' : 'Chế độ tối');
+        }
+        
+        initTheme();
+        // --- END DARK MODE ---
+
         // --- CẤU HÌNH SPEECH TO TEXT ---
         let speechRecognition;
         let isRecording = false;
@@ -174,7 +431,7 @@
         if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             speechRecognition = new SpeechRecognition();
-            speechRecognition.continuous = false; // Chỉ thu một đoạn, nếu muốn thu dài có thể đổi thành true
+            speechRecognition.continuous = false; 
             speechRecognition.interimResults = true;
             speechRecognition.lang = 'vi-VN';
 
@@ -191,7 +448,6 @@
                 }
                 
                 const input = document.getElementById('messageInput');
-                // Nếu có kết quả cuối cùng (Final), nối thêm vào textarea
                 if (finalTranscript) {
                     input.value = (input.value + ' ' + finalTranscript).trim();
                 }
@@ -336,8 +592,23 @@
         `;
 
         async function getSituationalQuiz(message) {
+            if (!checkAiLimit()) return null;
+            
+            const startTimestamp = performance.now();
+            const payloadString = JSON.stringify({
+                model: "llama-3.3-70b-versatile",
+                response_format: { type: "json_object" },
+                messages: [
+                    { role: "system", content: QUIZ_PROMPT },
+                    { role: "user", content: message }
+                ]
+            });
+
             try {
-                const response = await fetch(
+                // Tiêu tốn 1 lượt gọi AI
+                incrementAiUsage();
+
+                const response = await fetchWithExponentialBackoff(
                     "https://api.groq.com/openai/v1/chat/completions",
                     {
                         method: "POST",
@@ -345,27 +616,59 @@
                             "Content-Type": "application/json",
                             "Authorization": `Bearer ${CONFIG.apiKey}`
                         },
-                        body: JSON.stringify({
-                            model: "llama-3.3-70b-versatile",
-                            response_format: { type: "json_object" },
-                            messages: [
-                                { role: "system", content: QUIZ_PROMPT },
-                                { role: "user", content: message }
-                            ]
-                        })
+                        body: payloadString
                     }
                 );
+                
+                const endTimestamp = performance.now();
+                const latency = endTimestamp - startTimestamp;
+
+                if (!response.ok) {
+                    writeAiLog(message.length, latency, `Lỗi tạo câu hỏi: HTTP ${response.status}`, false);
+                    return null;
+                }
+
                 const data = await response.json();
-                return JSON.parse(data.choices[0].message.content);
+                const quizObj = JSON.parse(data.choices[0].message.content);
+                
+                writeAiLog(message.length, latency, `Tạo câu hỏi trắc nghiệm: "${quizObj.question.substring(0, 40)}..."`, true);
+                return quizObj;
             } catch (error) {
+                const endTimestamp = performance.now();
+                writeAiLog(message.length, endTimestamp - startTimestamp, `Lỗi tạo câu hỏi ngoại lệ: ${error.message}`, false);
                 console.error("Lỗi khi tạo câu hỏi tình huống:", error);
                 return null;
             }
         }
         
         async function getRescuePlan(message) {
+            if (!checkAiLimit()) {
+                return {
+                    level: "MEDIUM",
+                    title: "Bác đã dùng hết lượt gọi AI miễn phí trong phiên này rồi ạ.",
+                    steps: [
+                        "Bác hãy tải lại trang (reload) hoặc quay lại vào hôm sau để tiếp tục phân tích tin nhắn nhé.",
+                        "Tuyệt đối không bấm vào liên kết đáng ngờ trên tin nhắn.",
+                        "Hỏi ý kiến của con cháu trong nhà hoặc gọi điện trực tiếp lên tổng đài chính chủ ngân hàng để xác thực."
+                    ]
+                };
+            }
+
+            const startTimestamp = performance.now();
+            const payloadString = JSON.stringify({
+                model: "llama-3.3-70b-versatile",
+                response_format: { type: "json_object" },
+                messages: [
+                    { role: "system", content: RESCUE_PROMPT },
+                    { role: "user", content: message }
+                ]
+            });
+
             try {
-                const response = await fetch(
+                // Tiêu tốn 1 lượt gọi AI
+                incrementAiUsage();
+
+                const response = await fetchWithExponentialBackoff(
                     "https://api.groq.com/openai/v1/chat/completions",
                     {
                         method: "POST",
@@ -373,19 +676,26 @@
                             "Content-Type": "application/json",
                             "Authorization": `Bearer ${CONFIG.apiKey}`
                         },
-                        body: JSON.stringify({
-                            model: "llama-3.3-70b-versatile",
-                            response_format: { type: "json_object" },
-                            messages: [
-                                { role: "system", content: RESCUE_PROMPT },
-                                { role: "user", content: message }
-                            ]
-                        })
+                        body: payloadString
                     }
                 );
+
+                const endTimestamp = performance.now();
+                const latency = endTimestamp - startTimestamp;
+
+                if (!response.ok) {
+                    writeAiLog(message.length, latency, `Lỗi tạo cứu hộ: HTTP ${response.status}`, false);
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
                 const data = await response.json();
-                return JSON.parse(data.choices[0].message.content);
+                const rescueObj = JSON.parse(data.choices[0].message.content);
+                
+                writeAiLog(message.length, latency, `Lập phương án cứu hộ: Mức độ ${rescueObj.level}`, true);
+                return rescueObj;
             } catch (error) {
+                const endTimestamp = performance.now();
+                writeAiLog(message.length, endTimestamp - startTimestamp, `Lỗi lập phương án cứu hộ: ${error.message}`, false);
                 console.error(error);
                 return {
                     level: "MEDIUM",
@@ -404,8 +714,8 @@
             if (!area) return;
             area.classList.remove("hidden");
             area.innerHTML =
-                `<div class="p-4 rounded-xl border border-blue-200 bg-blue-50 h-full">
-                    <div class="font-bold text-blue-700 animate-pulse">
+                `<div class="p-4 rounded-xl border border-blue-200 bg-blue-50 dark:bg-blue-950/30 dark:border-blue-900 h-full">
+                    <div class="font-bold text-blue-700 dark:text-blue-400 animate-pulse">
                         🚑 Người ứng cứu AI đang phân tích...
                     </div>
                 </div>`;
@@ -416,15 +726,15 @@
             if (plan.level === "CRITICAL") colorClass = "red";
             
             let html = `
-                <div class="p-5 rounded-xl border border-${colorClass}-300 bg-${colorClass}-50 h-full shadow-sm">
-                    <div class="flex items-center gap-2 mb-4 border-b border-${colorClass}-200 pb-2">
+                <div class="p-5 rounded-xl border border-${colorClass}-300 dark:border-${colorClass}-800 bg-${colorClass}-50 dark:bg-${colorClass}-950/20 h-full shadow-sm animate-fade-in">
+                    <div class="flex items-center gap-2 mb-4 border-b border-${colorClass}-200 dark:border-${colorClass}-800 pb-2">
                         <span class="text-2xl">🚑</span>
-                        <h3 class="font-bold text-lg text-${colorClass}-900">
+                        <h3 class="font-bold text-lg text-${colorClass}-900 dark:text-${colorClass}-300">
                             Người ứng cứu AI
                         </h3>
                     </div>
                     <div class="mb-4">
-                        <span class="font-semibold text-${colorClass}-800 text-lg block">
+                        <span class="font-semibold text-${colorClass}-800 dark:text-${colorClass}-400 text-lg block">
                             ${plan.title}
                         </span>
                     </div>
@@ -434,8 +744,8 @@
             if (Array.isArray(plan.steps)) {
                 plan.steps.forEach((step, index) => {
                     html += `
-                        <li class="bg-white p-3 rounded-lg border border-${colorClass}-100 shadow-sm text-gray-800 leading-relaxed">
-                            <strong class="text-${colorClass}-600">
+                        <li class="bg-white dark:bg-gray-800 p-3 rounded-lg border border-${colorClass}-100 dark:border-gray-700 shadow-sm text-gray-800 dark:text-gray-200 leading-relaxed">
+                            <strong class="text-${colorClass}-600 dark:text-${colorClass}-400">
                                 ${index + 1}.
                             </strong>
                             ${step}
@@ -494,6 +804,7 @@
         document.getElementById('checkBtn').addEventListener('click', async () => {
             const originalText = document.getElementById('messageInput').value.trim();
             const btn = document.getElementById('checkBtn');
+            const scanner = document.getElementById('swipeScanner');
 
             if (!originalText) {
                 alert("Bác ơi, vui lòng điền tin nhắn vào trước khi bấm kiểm tra ạ!");
@@ -510,8 +821,17 @@
                 return;
             }
 
+            // KIỂM TRA HẠN MỨC GỌI AI TRONG PHIÊN (L1-07)
+            if (!checkAiLimit()) {
+                alert("Bác ơi! Bác đã dùng hết hạn mức 15 lượt gọi AI trong phiên này nhằm bảo vệ hệ thống rồi ạ. Vui lòng tải lại trang hoặc thử lại sau nhé!");
+                return;
+            }
+
             btn.disabled = true;
             btn.innerHTML = "<span class='animate-pulse'>⏳ Thám tử đang phân tích...</span>";
+            
+            // Kích hoạt hiệu ứng quét laser (Swiping)
+            if (scanner) scanner.classList.add('animate-swipe');
             
             document.getElementById('resultArea').classList.add('hidden');
             document.getElementById('situationalQuizArea').classList.add('hidden');
@@ -527,68 +847,111 @@
                 actions: ['Tạm thời không làm theo tin nhắn', 'Hỏi ý kiến từ người thân xung quanh']
             });
 
+            // Ghi nhận mốc thời gian bắt đầu đo lường Latency (L1-08)
+            const startAnalysisTime = performance.now();
+            const payload = {
+                model: "llama-3.3-70b-versatile",
+                response_format: { type: "json_object" },
+                messages: [
+                    { role: "system", content: SYSTEM_PROMPT },
+                    { role: "user", content: "Tin nhắn cần phân tích thực tế từ người dùng:\n\"" + originalText + "\"" }
+                ]
+            };
+
             try {
-                const response = await fetch(`https://api.groq.com/openai/v1/chat/completions`, {
+                // Tăng lượt sử dụng AI của phiên
+                incrementAiUsage();
+
+                // Sử dụng cơ chế Fetch có cơ chế tự động thử lại (L1-05)
+                const response = await fetchWithExponentialBackoff(`https://api.groq.com/openai/v1/chat/completions`, {
                     method: 'POST',
                     headers: { 
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${CONFIG.apiKey}`
                     },
-                    body: JSON.stringify({
-                        model: "llama-3.3-70b-versatile",
-                        response_format: { type: "json_object" },
-                        messages: [
-                            { role: "system", content: SYSTEM_PROMPT },
-                            { role: "user", content: "Tin nhắn cần phân tích thực tế từ người dùng:\n\"" + originalText + "\"" }
-                        ]
-                    })
+                    body: JSON.stringify(payload)
                 });
 
+                const endAnalysisTime = performance.now();
+                const latency = endAnalysisTime - startAnalysisTime;
+
+                if (!response.ok) {
+                    writeAiLog(originalText.length, latency, `Phân tích chính thất bại: HTTP ${response.status}`, false);
+                    throw new Error(`Phản hồi API chính trả về lỗi: ${response.status}`);
+                }
+
                 const data = await response.json();
-                if (!data?.choices?.length) throw new Error('No candidates');
-                if (data.choices[0].finish_reason && data.choices[0].finish_reason !== 'stop') throw new Error('AI refused to answer');
+                if (!data?.choices?.length) throw new Error('Không có kết quả phân tích phù hợp từ mô hình AI.');
+                if (data.choices[0].finish_reason && data.choices[0].finish_reason !== 'stop') throw new Error('AI từ chối trả lời vì lý do an toàn.');
 
                 const rawText = data.choices[0]?.message?.content || '';
                 const aiText = cleanJsonText(rawText);
                 finalResult = normalizeResult(JSON.parse(aiText));
                 finalResult.coTamLyText = null;
 
+                writeAiLog(originalText.length, latency, `Xác định rủi ro: [${finalResult.risk}] - ${finalResult.title}`, true);
+
+                // --- GỌI API CÔ TÂM LÝ ---
                 if (finalResult.risk === 'NGHI_NGO' || finalResult.risk === 'NGUY_HIEM') {
-                    try {
-                        const responseCoTamLy = await fetch(`https://api.groq.com/openai/v1/chat/completions`, {
-                            method: 'POST',
-                            headers: { 
-                                'Content-Type': 'application/json',
-                                'Authorization': `Bearer ${CONFIG.apiKey}`
-                            },
-                            body: JSON.stringify({
-                                model: "llama-3.3-70b-versatile",
-                                messages: [
-                                    { role: "system", content: CO_TAM_LY_PROMPT },
-                                    { role: "user", content: "Tin nhắn cần phân tích:\n\"" + originalText + "\"" }
-                                ]
-                            })
-                        });
-                        const dataCoTamLy = await responseCoTamLy.json();
-                        const txt = dataCoTamLy?.choices?.[0]?.message?.content?.trim();
-                        if (txt) finalResult.coTamLyText = txt;
-                    } catch (coTamLyError) {
-                        console.error("Lỗi khi gọi API Tâm lý:", coTamLyError);
-                        finalResult.coTamLyText = 'Cô tâm lý hiện đang bận hỗ trợ các bác khác một chút, bác hãy thử lại sau nhé!';
+                    const startCoTamLyTime = performance.now();
+                    
+                    if (checkAiLimit()) {
+                        incrementAiUsage();
+                        try {
+                            const responseCoTamLy = await fetchWithExponentialBackoff(`https://api.groq.com/openai/v1/chat/completions`, {
+                                method: 'POST',
+                                headers: { 
+                                    'Content-Type': 'application/json',
+                                    'Authorization': `Bearer ${CONFIG.apiKey}`
+                                },
+                                body: JSON.stringify({
+                                    model: "llama-3.3-70b-versatile",
+                                    messages: [
+                                        { role: "system", content: CO_TAM_LY_PROMPT },
+                                        { role: "user", content: "Tin nhắn cần phân tích:\n\"" + originalText + "\"" }
+                                    ]
+                                })
+                            });
+
+                            const endCoTamLyTime = performance.now();
+                            const latencyCoTamLy = endCoTamLyTime - startCoTamLyTime;
+
+                            if (responseCoTamLy.ok) {
+                                const dataCoTamLy = await responseCoTamLy.json();
+                                const txt = dataCoTamLy?.choices?.[0]?.message?.content?.trim();
+                                if (txt) {
+                                    finalResult.coTamLyText = txt;
+                                    writeAiLog(originalText.length, latencyCoTamLy, "Tư vấn tâm lý thành công từ 'Cô tâm lý'", true);
+                                }
+                            } else {
+                                writeAiLog(originalText.length, latencyCoTamLy, `Tư vấn tâm lý lỗi: HTTP ${responseCoTamLy.status}`, false);
+                                finalResult.coTamLyText = 'Cô tâm lý hiện đang bận hỗ trợ các bác khác một chút, bác hãy thử lại sau nhé!';
+                            }
+                        } catch (coTamLyError) {
+                            const endCoTamLyTime = performance.now();
+                            writeAiLog(originalText.length, endCoTamLyTime - startCoTamLyTime, `Lỗi tâm lý ngoại lệ: ${coTamLyError.message}`, false);
+                            console.error("Lỗi khi gọi API Tâm lý:", coTamLyError);
+                            finalResult.coTamLyText = 'Cô tâm lý hiện đang bận hỗ trợ các bác khác một chút, bác hãy thử lại sau nhé!';
+                        }
                     }
                 }
             } catch (error) {
+                const endAnalysisTime = performance.now();
+                writeAiLog(originalText.length, endAnalysisTime - startAnalysisTime, `Lỗi phân tích hệ thống: ${error.message}`, false);
                 console.error("Lỗi khi gọi API Groq:", error);
                 finalResult.desc = 'Hệ thống AI gặp lỗi xử lý dữ liệu. Bác hãy tạm thời nâng cao cảnh giác nhé!';
             } finally {
                 btn.disabled = false;
                 btn.innerHTML = '🔍 Kiểm tra ngay';
 
+                // Tắt hiệu ứng quét laser
+                if (scanner) scanner.classList.remove('animate-swipe');
+
                 renderResult(finalResult, originalText);
                 
                 const situationalQuizArea = document.getElementById('situationalQuizArea');
                 situationalQuizArea.classList.remove('hidden');
-                situationalQuizArea.innerHTML = `<div class="p-4 rounded-xl border border-blue-200 bg-blue-50 h-full"><div class="font-bold text-blue-700 animate-pulse text-center mt-4">🧠 Đang tạo bài tập tình huống thực tế...</div></div>`;
+                situationalQuizArea.innerHTML = `<div class="p-4 rounded-xl border border-blue-200 dark:border-blue-900 bg-blue-50 dark:bg-blue-950/30 h-full"><div class="font-bold text-blue-700 dark:text-blue-400 animate-pulse text-center mt-4">🧠 Đang tạo bài tập tình huống thực tế...</div></div>`;
 
                 const quizData = await getSituationalQuiz(originalText);
                 renderSituationalQuiz(quizData);
@@ -602,7 +965,7 @@
             (quotes || []).forEach(q => {
                 if (!q) return;
                 const escaped = String(q).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                result = result.replace(new RegExp(escaped, 'gi'), "<mark class='bg-yellow-300 px-1 rounded'>$&</mark>");
+                result = result.replace(new RegExp(escaped, 'gi'), "<mark class='bg-yellow-300 dark:bg-yellow-600 dark:text-white px-1 rounded'>$&</mark>");
             });
             return result;
         }
@@ -615,20 +978,20 @@
             resultArea.classList.remove('hidden');
             resultArea.innerHTML = '';
             
-            let cardColors = 'border-green-500 bg-green-50 text-green-700';
-            let badgeColor = 'bg-green-100 text-green-800';
+            let cardColors = 'border-green-500 bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-300';
+            let badgeColor = 'bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-200';
             
             if (data.risk === 'NGUY_HIEM') {
-                cardColors = 'border-red-500 bg-red-50 text-red-700';
-                badgeColor = 'bg-red-100 text-red-800';
+                cardColors = 'border-red-500 bg-red-50 dark:bg-red-950/20 text-red-700 dark:text-red-300';
+                badgeColor = 'bg-red-100 dark:bg-red-900/50 text-red-800 dark:text-red-200';
             } else if (data.risk === 'NGHI_NGO') {
-                cardColors = 'border-yellow-500 bg-yellow-50 text-yellow-700';
-                badgeColor = 'bg-yellow-100 text-yellow-800';
+                cardColors = 'border-yellow-500 bg-yellow-50 dark:bg-yellow-950/20 text-yellow-700 dark:text-yellow-300';
+                badgeColor = 'bg-yellow-100 dark:bg-yellow-900/50 text-yellow-800 dark:text-yellow-200';
             }
 
             let coTamLyHTML = '';
             if (data.coTamLyText) {
-                coTamLyHTML = "<div class='mt-4 md:mt-0 p-5 bg-purple-50 border border-purple-200 rounded-xl shadow-sm md:h-full'><h4 class='text-md font-bold text-purple-800 mb-3 flex items-center gap-2'><span class='text-xl'>🧠</span> Hiểu vì sao mình suýt tin?</h4><p class='text-purple-900 text-base leading-relaxed italic'>" + data.coTamLyText + "</p></div>";
+                coTamLyHTML = "<div class='mt-4 md:mt-0 p-5 bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-900 rounded-xl shadow-sm md:h-full animate-fade-in'><h4 class='text-md font-bold text-purple-800 dark:text-purple-300 mb-3 flex items-center gap-2'><span class='text-xl'>🧠</span> Hiểu vì sao mình suýt tin?</h4><p class='text-purple-900 dark:text-purple-200 text-base leading-relaxed italic'>" + data.coTamLyText + "</p></div>";
             }
 
             let signsList = "";
@@ -644,9 +1007,9 @@
             if (data.quotes && data.quotes.length > 0) {
                 let quotesTags = "";
                 for(let i=0; i<data.quotes.length; i++) {
-                    quotesTags += "<span class='bg-orange-100 text-orange-800 text-xs font-mono px-2.5 py-1 rounded-md border border-orange-200 shadow-sm'>\"" + data.quotes[i] + "\"</span> ";
+                    quotesTags += "<span class='bg-orange-100 dark:bg-orange-950/50 text-orange-800 dark:text-orange-300 text-xs font-mono px-2.5 py-1 rounded-md border border-orange-200 dark:border-orange-800 shadow-sm'>\"" + data.quotes[i] + "\"</span> ";
                 }
-                quotesHTML = "<div class='mt-4 bg-orange-50 border border-orange-200 p-4 rounded-xl'><h5 class='font-bold text-orange-800 text-sm mb-2'>Cụm từ đáng ngờ trích xuất:</h5><div class='flex flex-wrap gap-2'>" + quotesTags + "</div></div>";
+                quotesHTML = "<div class='mt-4 bg-orange-50 dark:bg-orange-950/20 border border-orange-200 dark:border-orange-900 p-4 rounded-xl'><h5 class='font-bold text-orange-800 dark:text-orange-300 text-sm mb-2'>Cụm từ đáng ngờ trích xuất:</h5><div class='flex flex-wrap gap-2'>" + quotesTags + "</div></div>";
             }
 
             let actionsList = "";
@@ -655,19 +1018,19 @@
                     actionsList += "<li class='mb-1'>" + data.actions[i] + "</li>";
                 }
             }
-            let actionsHTML = actionsList ? "<div class='mt-4 bg-blue-50 border border-blue-200 p-4 rounded-xl'><h5 class='font-bold text-blue-800 text-sm mb-2'>Hành động khuyến nghị:</h5><ul class='list-decimal pl-5 text-base text-gray-800 space-y-1'>" + actionsList + "</ul></div>" : "";
+            let actionsHTML = actionsList ? "<div class='mt-4 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900 p-4 rounded-xl'><h5 class='font-bold text-blue-800 dark:text-blue-300 text-sm mb-2'>Hành động khuyến nghị:</h5><ul class='list-decimal pl-5 text-base text-gray-800 dark:text-gray-200 space-y-1'>" + actionsList + "</ul></div>" : "";
 
             resultArea.innerHTML = 
-                "<div class='flex justify-between items-center border-b pb-3'><h2 class='text-xl md:text-2xl font-bold text-gray-800'>Kết quả phân tích:</h2><span class='px-4 py-1.5 rounded-full text-sm font-bold shadow-sm " + badgeColor + "'>" + (data.title || 'Chưa rõ') + "</span></div>" +
+                "<div class='flex justify-between items-center border-b dark:border-gray-800 pb-3 animate-fade-in'><h2 class='text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-200'>Kết quả phân tích:</h2><span class='px-4 py-1.5 rounded-full text-sm font-bold shadow-sm " + badgeColor + "'>" + (data.title || 'Chưa rõ') + "</span></div>" +
                 
-                "<div class='p-5 rounded-xl border-l-8 shadow-sm " + cardColors + "'><h3 class='text-2xl md:text-3xl font-bold uppercase mb-2'>" + (data.title || 'Chưa rõ') + "</h3><p class='text-base md:text-lg text-gray-800 mt-2 leading-relaxed'>" + data.desc + "</p></div>" +
+                "<div class='p-5 rounded-xl border-l-8 shadow-sm " + cardColors + " animate-fade-in'><h3 class='text-2xl md:text-3xl font-bold uppercase mb-2'>" + (data.title || 'Chưa rõ') + "</h3><p class='text-base md:text-lg text-gray-800 dark:text-gray-200 mt-2 leading-relaxed'>" + data.desc + "</p></div>" +
                 
-                "<div class='grid grid-cols-1 md:grid-cols-2 gap-4 mt-2'>" +
-                    "<div class='bg-yellow-50 border border-yellow-200 p-5 rounded-xl shadow-sm h-full'><h4 class='font-bold mb-3 text-yellow-900 flex items-center gap-2'>📌 Đoạn tin được phân tích</h4><p class='leading-relaxed text-base break-words text-gray-800'>" + highlightedText + "</p></div>" +
+                "<div class='grid grid-cols-1 md:grid-cols-2 gap-4 mt-2 animate-fade-in'>" +
+                    "<div class='bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-900 p-5 rounded-xl shadow-sm h-full'><h4 class='font-bold mb-3 text-yellow-900 dark:text-yellow-300 flex items-center gap-2'>📌 Đoạn tin được phân tích</h4><p class='leading-relaxed text-base break-words text-gray-800 dark:text-gray-200'>" + highlightedText + "</p></div>" +
                     (data.coTamLyText ? coTamLyHTML : "") +
                 "</div>" +
 
-                "<div class='bg-gray-50 p-5 rounded-xl border border-gray-200 shadow-sm mt-4'><h4 class='font-bold text-lg md:text-xl mb-3 text-gray-800'>Dấu hiệu nhận biết chi tiết:</h4><ul class='list-disc pl-6 text-base md:text-lg text-gray-700 space-y-2'>" + signsList + "</ul>" + quotesHTML + actionsHTML + "</div>";
+                "<div class='bg-gray-50 dark:bg-gray-800/50 p-5 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm mt-4 animate-fade-in'><h4 class='font-bold text-lg md:text-xl mb-3 text-gray-800 dark:text-gray-200'>Dấu hiệu nhận biết chi tiết:</h4><ul class='list-disc pl-6 text-base md:text-lg text-gray-700 dark:text-gray-300 space-y-2'>" + signsList + "</ul>" + quotesHTML + actionsHTML + "</div>";
         }
 
         function renderSituationalQuiz(quiz) {
@@ -678,7 +1041,7 @@
             }
             container.classList.remove("hidden");
 
-            let html = `<div class="h-full flex flex-col"><h3 class="font-bold text-lg md:text-xl mb-4 text-gray-800 border-b pb-2">🎯 Tình huống: ${quiz.question}</h3>`;
+            let html = `<div class="h-full flex flex-col animate-fade-in"><h3 class="font-bold text-lg md:text-xl mb-4 text-gray-800 dark:text-gray-200 border-b dark:border-gray-700 pb-2">🎯 Tình huống: ${quiz.question}</h3>`;
             html += `<div class="flex flex-col gap-3 flex-grow">`;
 
             quiz.options.forEach((option, i) => {
@@ -687,17 +1050,17 @@
                     <button
                         onclick="handleSituationalAnswer(this, ${option.isCorrect})"
                         data-advice="${safeAdvice}"
-                        class="sit-btn bg-white border-2 border-gray-200 py-3.5 px-4 rounded-xl flex justify-between items-center text-left gap-4 transition-all duration-300 hover:border-blue-400 hover:bg-blue-50 hover:shadow-md">
-                        <span class="flex-1 text-gray-800 font-medium text-base">${option.text}</span>
-                        <span class="text-2xl shrink-0 opacity-80 bg-gray-50 rounded-full w-10 h-10 flex items-center justify-center">${option.emoji || ''}</span>
+                        class="sit-btn bg-white dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 py-3.5 px-4 rounded-xl flex justify-between items-center text-left gap-4 transition-all duration-300 hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-gray-600 hover:shadow-md">
+                        <span class="flex-1 text-gray-800 dark:text-gray-200 font-medium text-base">${option.text}</span>
+                        <span class="text-2xl shrink-0 opacity-80 bg-gray-50 dark:bg-gray-600 rounded-full w-10 h-10 flex items-center justify-center">${option.emoji || ''}</span>
                     </button>
                 `;
             });
 
             html += `</div>`;
             html += `
-                <div id="situational-advice" class="mt-4 p-5 min-h-[80px] rounded-xl border border-gray-200 bg-gray-50 flex items-center justify-center transition-all duration-300 shadow-inner">
-                    <span class="text-sm text-gray-500 italic text-center">Nhấn vào một lựa chọn ở trên để xem phân tích chi tiết. Quyết định của bạn rất quan trọng!</span>
+                <div id="situational-advice" class="mt-4 p-5 min-h-[80px] rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 flex items-center justify-center transition-all duration-300 shadow-inner">
+                    <span class="text-sm text-gray-500 dark:text-gray-400 italic text-center">Nhấn vào một lựa chọn ở trên để xem phân tích chi tiết. Quyết định của bạn rất quan trọng!</span>
                 </div>
             </div>`;
 
@@ -713,33 +1076,33 @@
                 btn.classList.remove('hover:border-blue-400', 'hover:bg-blue-50', 'hover:shadow-md');
             });
 
-            selectedButton.classList.remove('opacity-60', 'border-gray-200');
+            selectedButton.classList.remove('opacity-60', 'border-gray-200', 'dark:border-gray-600');
             const adviceBox = document.getElementById('situational-advice');
             const adviceText = selectedButton.getAttribute('data-advice');
             const rescueArea = document.getElementById('rescueArea');
 
             if (isCorrect) {
-                selectedButton.classList.add('border-green-500', 'bg-green-100', 'text-green-900', 'opacity-100', 'font-bold', 'shadow-md');
+                selectedButton.classList.add('border-green-500', 'bg-green-100', 'dark:bg-green-950/40', 'text-green-900', 'dark:text-green-200', 'opacity-100', 'font-bold', 'shadow-md');
                 
-                adviceBox.className = "mt-4 p-5 rounded-xl text-base leading-relaxed border-2 border-green-400 bg-green-50 shadow-md transition-all duration-300";
+                adviceBox.className = "mt-4 p-5 rounded-xl text-base leading-relaxed border-2 border-green-400 bg-green-50 dark:bg-green-950/20 shadow-md transition-all duration-300 animate-fade-in";
                 adviceBox.innerHTML = `
-                    <div class="font-bold text-green-700 flex items-center gap-2 mb-2 text-lg">
+                    <div class="font-bold text-green-700 dark:text-green-400 flex items-center gap-2 mb-2 text-lg">
                         <span class="text-2xl">✅</span> Phản ứng chuẩn xác!
                     </div>
-                    <p class="text-green-900 font-medium">${adviceText}</p>
+                    <p class="text-green-900 dark:text-green-200 font-medium">${adviceText}</p>
                 `;
                 
                 if(rescueArea) rescueArea.classList.add('hidden');
 
             } else {
-                selectedButton.classList.add('border-red-500', 'bg-red-100', 'text-red-900', 'opacity-100', 'font-bold', 'shadow-md');
+                selectedButton.classList.add('border-red-500', 'bg-red-100', 'dark:bg-red-950/40', 'text-red-900', 'dark:text-red-200', 'opacity-100', 'font-bold', 'shadow-md');
                 
-                adviceBox.className = "mt-4 p-5 rounded-xl text-base leading-relaxed border-2 border-red-400 bg-red-50 shadow-md transition-all duration-300";
+                adviceBox.className = "mt-4 p-5 rounded-xl text-base leading-relaxed border-2 border-red-400 bg-red-50 dark:bg-red-950/20 shadow-md transition-all duration-300 animate-fade-in";
                 adviceBox.innerHTML = `
-                    <div class="font-bold text-red-700 flex items-center gap-2 mb-2 text-lg">
+                    <div class="font-bold text-red-700 dark:text-red-400 flex items-center gap-2 mb-2 text-lg">
                         <span class="text-2xl">⚠️</span> Quyết định nguy hiểm!
                     </div>
-                    <p class="text-red-900 font-medium">${adviceText}</p>
+                    <p class="text-red-900 dark:text-red-200 font-medium">${adviceText}</p>
                 `;
 
                 const currentMessage = document.getElementById('messageInput').value.trim();
@@ -759,8 +1122,49 @@
             const urlRegex = /(https?:\/\/[^\s<>"]+|www\.[^\s<>"]+|[a-zA-Z0-9-]+\.(?:com|vn|net|org|gov|top|cc|xyz|info|club)(?:\/[^\s<>"]*)?)/gi;
             const matches = text.match(urlRegex);
             if (!matches) return [];
+
+            if (!checkAiLimit()) {
+                return matches.map(url => ({
+                    originalUrl: url,
+                    isFake: true,
+                    fakeType: "Chưa xác minh",
+                    warningReason: "Hết hạn mức kiểm tra URL tự động của phiên."
+                }));
+            }
+
+            const startUrlScanTime = performance.now();
+            const payloadString = JSON.stringify({
+                model: "llama-3.3-70b-versatile",
+                response_format: { type: "json_object" },
+                messages: [
+                    {
+                        role: "system",
+                        content: `
+                        Bạn là chuyên gia phát hiện URL lừa đảo.
+                        Trả về JSON:
+                        {
+                            "results":[
+                                {
+                                    "url":"",
+                                    "isFake":true,
+                                    "fakeType":"",
+                                    "warningReason":""
+                                }
+                            ]
+                        }
+                        `
+                    },
+                    {
+                        role: "user",
+                        content: JSON.stringify({ message: text, urls: matches })
+                    }
+                ]
+            });
+
             try {
-                const response = await fetch(
+                incrementAiUsage();
+
+                const response = await fetchWithExponentialBackoff(
                     "https://api.groq.com/openai/v1/chat/completions",
                     {
                         method: "POST",
@@ -768,39 +1172,31 @@
                             "Content-Type": "application/json",
                             "Authorization": `Bearer ${CONFIG.apiKey}`
                         },
-                        body: JSON.stringify({
-                            model: "llama-3.3-70b-versatile",
-                            response_format: { type: "json_object" },
-                            messages: [
-                                {
-                                    role: "system",
-                                    content: `
-                                    Bạn là chuyên gia phát hiện URL lừa đảo.
-                                    Trả về JSON:
-                                    {
-                                        "results":[
-                                            {
-                                                "url":"",
-                                                "isFake":true,
-                                                "fakeType":"",
-                                                "warningReason":""
-                                            }
-                                        ]
-                                    }
-                                    `
-                                },
-                                {
-                                    role: "user",
-                                    content: JSON.stringify({ message: text, urls: matches })
-                                }
-                            ]
-                        })
+                        body: payloadString
                     }
                 );
+
+                const endUrlScanTime = performance.now();
+                const latency = endUrlScanTime - startUrlScanTime;
+
+                if (!response.ok) {
+                    writeAiLog(text.length, latency, `Lỗi quét URL: HTTP ${response.status}`, false);
+                    return matches.map(url => ({
+                        originalUrl: url,
+                        isFake: false,
+                        fakeType: "",
+                        warningReason: "Không phân tích được"
+                    }));
+                }
+
                 const data = await response.json();
                 const result = JSON.parse(data.choices[0].message.content);
+                
+                writeAiLog(text.length, latency, `Quét liên kết URL: Phát hiện ${result.results?.length || 0} link.`, true);
                 return result.results || [];
             } catch (err) {
+                const endUrlScanTime = performance.now();
+                writeAiLog(text.length, endUrlScanTime - startUrlScanTime, `Lỗi quét URL ngoại lệ: ${err.message}`, false);
                 console.error(err);
                 return matches.map(url => ({
                     originalUrl: url,
@@ -824,15 +1220,15 @@
             container.classList.remove('hidden');
             const fakeCount = scannedLinks.filter(link => link.isFake === true || link.risk === "DANGEROUS" || link.risk === "SUSPICIOUS").length;
 
-            let html = "<div class='h-full flex flex-col'>" +
-                "<div class='flex items-center gap-2 mb-4 border-b pb-2 border-gray-200 opacity-80'>" +
+            let html = "<div class='h-full flex flex-col animate-fade-in'>" +
+                "<div class='flex items-center gap-2 mb-4 border-b pb-2 border-gray-200 dark:border-gray-700 opacity-80'>" +
                 "<span class='text-xl'>🔗</span>" +
-                "<h3 class='font-bold text-base text-gray-800'>Kết quả quét URL (" + scannedLinks.length + " liên kết)</h3></div>" + 
+                "<h3 class='font-bold text-base text-gray-800 dark:text-gray-200'>Kết quả quét URL (" + scannedLinks.length + " liên kết)</h3></div>" + 
                 "<div class='space-y-3 flex-grow'>";
 
             container.className = fakeCount > 0
-                ? 'p-5 rounded-xl border border-red-300 bg-red-50 h-full shadow-sm'
-                : 'p-5 rounded-xl border border-green-300 bg-green-50 h-full shadow-sm';
+                ? 'p-5 rounded-xl border border-red-300 dark:border-red-900 bg-red-50 dark:bg-red-950/20 h-full shadow-sm'
+                : 'p-5 rounded-xl border border-green-300 dark:border-green-900 bg-green-50 dark:bg-green-950/20 h-full shadow-sm';
 
             scannedLinks.forEach(link => {
                 const url = link.originalUrl || link.url || "Không xác định";
@@ -842,20 +1238,20 @@
 
                 if (isDangerous) {
                     html +=
-                        "<div class='bg-white border-2 border-red-300 rounded-xl p-4 shadow-sm'>" +
+                        "<div class='bg-white dark:bg-gray-800 border-2 border-red-300 dark:border-red-900 rounded-xl p-4 shadow-sm'>" +
                         "<div class='flex items-center gap-2 mb-2 flex-wrap'>" +
                         "<span class='bg-red-600 text-white font-extrabold text-[11px] px-2.5 py-1 rounded shadow-sm'>NGUY HIỂM</span>" +
-                        "<span class='text-sm font-bold text-red-800'>" + fakeType + "</span></div>" +
-                        "<p class='text-sm font-mono text-gray-600 bg-gray-50 p-2.5 rounded-lg border border-gray-200 break-all mb-3'>" + url + "</p>" +
-                        "<div class='text-sm text-red-700 font-medium bg-red-50 p-3 rounded-lg border border-dashed border-red-300'>" +
+                        "<span class='text-sm font-bold text-red-800 dark:text-red-400'>" + fakeType + "</span></div>" +
+                        "<p class='text-sm font-mono text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-900 p-2.5 rounded-lg border border-gray-200 dark:border-gray-700 break-all mb-3'>" + url + "</p>" +
+                        "<div class='text-sm text-red-700 dark:text-red-300 font-medium bg-red-50 dark:bg-red-950/30 p-3 rounded-lg border border-dashed border-red-300 dark:border-red-800'>" +
                         "⚠️ <strong>Tuyệt đối không truy cập:</strong> " + warningReason + "</div></div>";
                 } else {
                     html +=
-                        "<div class='bg-white border-2 border-green-300 rounded-xl p-4 shadow-sm'>" +
+                        "<div class='bg-white dark:bg-gray-800 border-2 border-green-300 dark:border-green-900 rounded-xl p-4 shadow-sm'>" +
                         "<div class='flex items-center gap-2 mb-2'>" +
                         "<span class='bg-green-600 text-white font-extrabold text-[11px] px-2.5 py-1 rounded shadow-sm'>AN TOÀN</span>" +
-                        "<span class='text-sm text-gray-600 font-medium'>Đường dẫn hợp lệ</span></div>" +
-                        "<p class='text-sm font-mono text-gray-700 bg-gray-50 p-2.5 rounded-lg border border-gray-200 break-all'>" + url + "</p></div>";
+                        "<span class='text-sm text-gray-600 dark:text-gray-400 font-medium'>Đường dẫn hợp lệ</span></div>" +
+                        "<p class='text-sm font-mono text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 p-2.5 rounded-lg border border-gray-200 dark:border-gray-700 break-all'>" + url + "</p></div>";
                 }
             });
 
@@ -863,7 +1259,7 @@
             container.innerHTML = html;
         }
 
-        // --- CẤU TRÚC DỮ LIỆU ĐỂ CLEAN CODE & ĐẠT CHUẨN MÃ SẠCH ---
+        // --- CẤU TRÚC DỮ LIỆU THƯ VIỆN ĐÀO TẠO & PHÒNG CHỐNG ---
         const OFFICIAL_HOTLINES_DATA = [
             {
                 id: 101,
@@ -994,7 +1390,7 @@
                 tags: ['Công an', 'Tâm lý'],
                 name: 'Đe dọa liên quan đường dây tội phạm',
                 desc: 'Mạo danh điều tra viên, viện kiểm sát gọi điện thông báo số tài khoản liên quan đường dây rửa tiền.',
-                example: 'Cục CSĐT thông báo: Số CMND của ông/bà bị tình nghi rửa tiền xuyên quốc gia.'
+                example: 'Cục CSĐT thông báo: Số CMND của ông/bài bị tình nghi rửa tiền xuyên quốc gia.'
             },
             {
                 id: 5,
@@ -1095,26 +1491,26 @@
                 for(let i=0; i<OFFICIAL_HOTLINES_DATA.length; i++) {
                     let item = OFFICIAL_HOTLINES_DATA[i];
                     let typeBadge = '';
-                    if (item.type === 'gov') typeBadge = 'bg-cyan-100 text-cyan-800 border-cyan-200';
-                    else if (item.type === 'police') typeBadge = 'bg-red-100 text-red-800 border-red-200';
-                    else typeBadge = 'bg-blue-100 text-blue-800 border-blue-200';
+                    if (item.type === 'gov') typeBadge = 'bg-cyan-100 text-cyan-800 border-cyan-200 dark:bg-cyan-950/40 dark:text-cyan-300 dark:border-cyan-800';
+                    else if (item.type === 'police') typeBadge = 'bg-red-100 text-red-800 border-red-200 dark:bg-red-950/40 dark:text-red-300 dark:border-red-800';
+                    else typeBadge = 'bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-800';
 
                     html += `
-                        <div class='bg-white border-2 border-green-400 rounded-xl p-5 shadow-sm hover:shadow-md transition-all h-full flex flex-col'>
+                        <div class='bg-white dark:bg-gray-800 border-2 border-green-400 dark:border-green-600 rounded-xl p-5 shadow-sm hover:shadow-md transition-all h-full flex flex-col animate-fade-in'>
                             <div class='flex flex-wrap justify-between items-start mb-3 gap-3'>
                                 <div class='flex flex-wrap gap-1.5'>
                                     <span class='text-xs font-bold px-2.5 py-1 rounded-md shadow-sm border ${typeBadge}'>${item.tags[0]}</span>
-                                    <span class='text-xs font-bold px-2.5 py-1 rounded-md shadow-sm bg-green-100 text-green-900 border border-green-300'>✓ ĐÃ XÁC THỰC</span>
+                                    <span class='text-xs font-bold px-2.5 py-1 rounded-md shadow-sm bg-green-100 text-green-900 border border-green-300 dark:bg-green-950/40 dark:text-green-300 dark:border-green-800'>✓ ĐÃ XÁC THỰC</span>
                                 </div>
                                 <a href='tel:${item.phone}' class='bg-green-600 hover:bg-green-700 text-white font-bold text-sm px-4 py-1.5 rounded-lg shadow-sm transition flex items-center gap-1.5 shrink-0'>
                                     📞 Gọi ngay
                                 </a>
                             </div>
-                            <h4 class='font-bold text-gray-800 text-lg mb-1'>${item.name}</h4>
-                            <p class='text-base font-mono text-green-800 font-bold bg-green-50 px-3 py-1.5 rounded-lg border border-green-200 w-fit mb-3'>
+                            <h4 class='font-bold text-gray-800 dark:text-gray-200 text-lg mb-1'>${item.name}</h4>
+                            <p class='text-base font-mono text-green-800 dark:text-green-300 font-bold bg-green-50 dark:bg-green-950/30 px-3 py-1.5 rounded-lg border border-green-200 dark:border-green-800 w-fit mb-3'>
                                 Đường dây nóng: ${item.phone}
                             </p>
-                            <p class='text-sm text-gray-700 leading-relaxed mt-auto border-t border-gray-100 pt-3'>
+                            <p class='text-sm text-gray-700 dark:text-gray-300 leading-relaxed mt-auto border-t border-gray-100 dark:border-gray-700 pt-3'>
                                 ${item.note}
                             </p>
                         </div>`;
@@ -1126,17 +1522,17 @@
             const filteredData = filterGroup === 'all' ? SCAM_LIBRARY_DATA : SCAM_LIBRARY_DATA.filter(item => item.group === filterGroup);
             
             const TAG_STYLES = {
-                'Ngân hàng': 'bg-blue-100 text-blue-800 border-blue-200',
-                'Công an': 'bg-red-100 text-red-800 border-red-200',
-                'Nhà mạng': 'bg-purple-100 text-purple-800 border-purple-200',
-                'Trúng thưởng': 'bg-green-100 text-green-800 border-green-200',
-                'Giao hàng': 'bg-orange-100 text-orange-800 border-orange-200',
-                'Cảnh báo': 'bg-amber-100 text-amber-800 border-amber-200',
-                'Công nghệ': 'bg-cyan-100 text-cyan-800 border-cyan-200',
-                'Giả mạo': 'bg-gray-100 text-gray-700 border-gray-300',
-                'Tâm lý': 'bg-indigo-100 text-indigo-800 border-indigo-200',
-                'Sàn TMĐT': 'bg-rose-100 text-rose-800 border-rose-200',
-                'Mã độc': 'bg-emerald-100 text-emerald-800 border-emerald-200'
+                'Ngân hàng': 'bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-800',
+                'Công an': 'bg-red-100 text-red-800 border-red-200 dark:bg-red-950/40 dark:text-red-300 dark:border-red-800',
+                'Nhà mạng': 'bg-purple-100 text-purple-800 border-purple-200 dark:bg-purple-950/40 dark:text-purple-300 dark:border-purple-800',
+                'Trúng thưởng': 'bg-green-100 text-green-800 border-green-200 dark:bg-green-950/40 dark:text-green-300 dark:border-green-800',
+                'Giao hàng': 'bg-orange-100 text-orange-800 border-orange-200 dark:bg-orange-950/40 dark:text-orange-300 dark:border-orange-800',
+                'Cảnh báo': 'bg-amber-100 text-amber-800 border-amber-200 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800',
+                'Công nghệ': 'bg-cyan-100 text-cyan-800 border-cyan-200 dark:bg-cyan-950/40 dark:text-cyan-300 dark:border-cyan-800',
+                'Giả mạo': 'bg-gray-100 text-gray-700 border-gray-300 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600',
+                'Tâm lý': 'bg-indigo-100 text-indigo-800 border-indigo-200 dark:bg-indigo-950/40 dark:text-indigo-300 dark:border-indigo-800',
+                'Sàn TMĐT': 'bg-rose-100 text-rose-800 border-rose-200 dark:bg-rose-950/40 dark:text-rose-300 dark:border-rose-800',
+                'Mã độc': 'bg-emerald-100 text-emerald-800 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800'
             };
 
             let listHTML = "";
@@ -1150,25 +1546,25 @@
                 }
                 
                 listHTML += `
-                    <div class='bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:border-blue-400 hover:shadow-md transition-all h-full flex flex-col'>
+                    <div class='bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 shadow-sm hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-md transition-all h-full flex flex-col animate-fade-in'>
                         <div class='flex justify-between items-start mb-3 gap-3'>
                             <div class='flex flex-wrap gap-1.5'>${tagsHTML}</div>
-                            <button onclick='toggleScamDetail(${item.id})' class='text-blue-600 bg-blue-50 px-2 py-1 rounded-md text-xs font-bold hover:bg-blue-100 transition flex items-center gap-1 shrink-0 border border-blue-100'>
+                            <button onclick='toggleScamDetail(${item.id})' class='text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-gray-900 px-2 py-1 rounded-md text-xs font-bold hover:bg-blue-100 dark:hover:bg-gray-700 transition flex items-center gap-1 shrink-0 border border-blue-100 dark:border-gray-600'>
                                 <span id='text-${item.id}'>Chi tiết</span> <span id='arrow-${item.id}'>▼</span>
                             </button>
                         </div>
-                        <h4 class='font-bold text-gray-800 text-lg cursor-pointer hover:text-blue-700 transition' onclick='toggleScamDetail(${item.id})'>
+                        <h4 class='font-bold text-gray-800 dark:text-gray-200 text-lg cursor-pointer hover:text-blue-700 dark:hover:text-blue-400 transition' onclick='toggleScamDetail(${item.id})'>
                             ${item.name}
                         </h4>
-                        <div id='detail-${item.id}' class='hidden mt-3 pt-4 border-t border-gray-100 space-y-3 flex-grow flex flex-col'>
-                            <p class='text-sm md:text-base text-gray-700 leading-relaxed'>
-                                <strong class='text-gray-900 block mb-1'>Mô tả thủ đoạn:</strong> ${item.desc}
+                        <div id='detail-${item.id}' class='hidden mt-3 pt-4 border-t border-gray-100 dark:border-gray-700 space-y-3 flex-grow flex flex-col'>
+                            <p class='text-sm md:text-base text-gray-700 dark:text-gray-300 leading-relaxed'>
+                                <strong class='text-gray-900 dark:text-gray-100 block mb-1'>Mô tả thủ đoạn:</strong> ${item.desc}
                             </p>
-                            <div class='bg-red-50 border border-red-200 p-3.5 rounded-lg mt-auto'>
-                                <strong class='text-red-900 font-sans block text-sm mb-1 flex items-center gap-1'>
+                            <div class='bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900/40 p-3.5 rounded-lg mt-auto'>
+                                <strong class='text-red-900 dark:text-red-400 font-sans block text-sm mb-1 flex items-center gap-1'>
                                     <span>📩</span> Ví dụ tin nhắn thực tế:
                                 </strong>
-                                <p class='text-sm font-mono text-red-800 italic leading-relaxed'>
+                                <p class='text-sm font-mono text-red-800 dark:text-red-300 italic leading-relaxed'>
                                     "${item.example}"
                                 </p>
                             </div>
@@ -1196,11 +1592,11 @@
         function filterLibrary(group) {
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('bg-blue-600', 'text-white', 'shadow-sm'); 
-                btn.classList.add('bg-gray-100', 'text-gray-600');
+                btn.classList.add('bg-gray-100', 'dark:bg-gray-800', 'text-gray-600', 'dark:text-gray-300');
             });
             const activeBtn = document.getElementById("btn-filter-" + group);
             if (activeBtn) {
-                activeBtn.classList.remove('bg-gray-100', 'text-gray-600'); 
+                activeBtn.classList.remove('bg-gray-100', 'dark:bg-gray-800', 'text-gray-600', 'dark:text-gray-300'); 
                 activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-sm');
             }
             renderLibrary(group);
@@ -1234,17 +1630,17 @@
             answeredPractice = false;
             
             let html = `
-                <div class='bg-white p-6 rounded-2xl shadow-md border border-gray-200 space-y-4'>
-                    <div class='flex items-center justify-between gap-2 border-b pb-2'>
-                        <h3 class='font-bold text-lg md:text-xl text-gray-800'>Chặng tập huấn #${currentSetNumber}</h3>
-                        <span class='text-sm font-bold bg-blue-100 text-blue-800 px-3 py-1 rounded-full'>
+                <div class='bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-md border border-gray-200 dark:border-gray-700 space-y-4 animate-fade-in'>
+                    <div class='flex items-center justify-between gap-2 border-b dark:border-gray-700 pb-2'>
+                        <h3 class='font-bold text-lg md:text-xl text-gray-800 dark:text-gray-200'>Chặng tập huấn #${currentSetNumber}</h3>
+                        <span class='text-sm font-bold bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-blue-300 px-3 py-1 rounded-full'>
                             Câu ${practiceIndex + 1}/${currentPracticeSet.length}
                         </span>
                     </div>
-                    <div class='w-full h-2.5 bg-gray-100 rounded-full overflow-hidden shadow-inner'>
+                    <div class='w-full h-2.5 bg-gray-100 dark:bg-gray-900 rounded-full overflow-hidden shadow-inner'>
                         <div class='h-full bg-blue-500 transition-all duration-500' style='width:${(practiceIndex / currentPracticeSet.length) * 100}%'></div>
                     </div>
-                    <div class='bg-yellow-50 border border-yellow-200 p-5 rounded-xl text-lg md:text-xl font-medium leading-relaxed text-gray-800 shadow-sm'>
+                    <div class='bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-900/50 p-5 rounded-xl text-lg md:text-xl font-medium leading-relaxed text-gray-800 dark:text-gray-200 shadow-sm'>
                         "${q.text}"
                     </div>
                     <div class='mt-4 grid grid-cols-2 gap-3 md:gap-4'>
@@ -1271,15 +1667,15 @@
             document.getElementById('practice-scam-btn').classList.add('opacity-50');
             document.getElementById('practice-safe-btn').classList.add('opacity-50');
 
-            let resultClass = correct ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300';
+            let resultClass = correct ? 'bg-green-50 dark:bg-green-950/20 border-green-300 dark:border-green-900' : 'bg-red-50 dark:bg-red-950/20 border-red-300 dark:border-red-900';
             let titleText = correct ? '✅ Nhận định chính xác!' : '❌ Nhận định chưa chuẩn';
-            let titleColor = correct ? 'text-green-700' : 'text-red-700';
+            let titleColor = correct ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-400';
             
             let feedbackHTML = `
                 <div class='mt-4 p-5 rounded-xl border-2 shadow-sm ${resultClass} animate-fade-in'>
                     <h4 class='font-bold text-xl ${titleColor}'>${titleText}</h4>
-                    <p class='mt-2 text-base md:text-lg text-gray-800 font-medium'>Giải thích: ${q.reason}</p>
-                    <button onclick='nextPractice()' class='mt-4 w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-bold text-lg transition-all shadow-md active:scale-95'>
+                    <p class='mt-2 text-base md:text-lg text-gray-800 dark:text-gray-200 font-medium'>Giải thích: ${q.reason}</p>
+                    <button onclick='nextPractice()' class='mt-4 w-full md:w-auto bg-blue-600 dark:bg-blue-500 text-white px-8 py-3 rounded-xl font-bold text-lg transition-all shadow-md active:scale-95'>
                         Tiếp tục hành trình
                     </button>
                 </div>`;
@@ -1294,15 +1690,15 @@
 
         function renderPracticeResult() {
             let level = practiceScore === 5 ? '🏆 Chuyên gia phòng chống lừa đảo' : (practiceScore >= 3 ? '🌟 Khá tốt, cần cẩn thận hơn' : '⚠️ Cần rèn luyện thêm cảnh giác');
-            let color = practiceScore === 5 ? 'text-green-600' : (practiceScore >= 3 ? 'text-yellow-600' : 'text-red-600');
+            let color = practiceScore === 5 ? 'text-green-600 dark:text-green-400' : (practiceScore >= 3 ? 'text-yellow-600 dark:text-yellow-400' : 'text-red-600 dark:text-red-400');
             
             document.getElementById('practiceArea').innerHTML = `
-                <div class='bg-white p-8 rounded-2xl shadow-md space-y-4 border border-gray-200 text-center'>
+                <div class='bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-md space-y-4 border border-gray-200 dark:border-gray-700 text-center animate-fade-in'>
                     <div class='text-5xl mb-4'>${practiceScore === 5 ? '🏅' : '🎯'}</div>
-                    <h3 class='text-2xl md:text-3xl font-bold text-gray-800'>Hoàn thành xuất sắc!</h3>
-                    <p class='text-lg md:text-xl text-gray-600'>Điểm của bạn: <strong class='text-blue-700 text-2xl'>${practiceScore}/${currentPracticeSet.length}</strong></p>
+                    <h3 class='text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200'>Hoàn thành xuất sắc!</h3>
+                    <p class='text-lg md:text-xl text-gray-600 dark:text-gray-400'>Điểm của bạn: <strong class='text-blue-700 dark:text-blue-400 text-2xl'>${practiceScore}/${currentPracticeSet.length}</strong></p>
                     <p class='text-lg md:text-xl font-bold ${color} mt-2'>${level}</p>
-                    <button onclick='startPractice()' class='mt-6 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-bold text-lg shadow-md transition-all active:scale-95'>
+                    <button onclick='startPractice()' class='mt-6 bg-blue-600 dark:bg-blue-500 text-white px-8 py-3 rounded-xl font-bold text-lg shadow-md transition-all active:scale-95'>
                         Luyện tập bộ đề mới
                     </button>
                 </div>`;
@@ -1312,23 +1708,23 @@
             const historyList = document.getElementById('historyList');
             let history = JSON.parse(localStorage.getItem('scamCheckHistory')) || [];
             if (history.length === 0) {
-                historyList.innerHTML = '<p class="text-gray-600 text-lg md:col-span-2 text-center py-10 bg-gray-50 rounded-xl border border-dashed border-gray-300">Chưa có tin nhắn nào được lưu trong lịch sử.</p>';
+                historyList.innerHTML = '<p class="text-gray-600 dark:text-gray-400 text-lg md:col-span-2 text-center py-10 bg-gray-50 dark:bg-gray-800/40 rounded-xl border border-dashed border-gray-300 dark:border-gray-700">Chưa có tin nhắn nào được lưu trong lịch sử.</p>';
                 return;
             }
             let html = "";
             for(let i=0; i<history.length; i++) {
                 let item = history[i];
-                let badgeColor = item.riskType === 'NGUY_HIEM' ? 'bg-red-100 text-red-800 border-red-200' : (item.riskType === 'NGHI_NGO' ? 'bg-yellow-100 text-yellow-800 border-yellow-200' : 'bg-green-100 text-green-800 border-green-200');
+                let badgeColor = item.riskType === 'NGUY_HIEM' ? 'bg-red-100 text-red-800 border-red-200 dark:bg-red-950/40 dark:text-red-300 dark:border-red-800' : (item.riskType === 'NGHI_NGO' ? 'bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-yellow-950/40 dark:text-yellow-300 dark:border-yellow-800' : 'bg-green-100 text-green-800 border-green-200 dark:bg-green-950/40 dark:text-green-300 dark:border-green-800');
                 
                 html += `
-                    <div onclick='viewSavedResult(${i})' class='p-5 bg-white border border-gray-200 rounded-xl shadow-sm hover:border-blue-400 hover:shadow-md cursor-pointer transition-all h-full flex flex-col'>
+                    <div onclick='viewSavedResult(${i})' class='p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm hover:border-blue-400 dark:hover:border-blue-500 cursor-pointer transition-all h-full flex flex-col animate-fade-in'>
                         <div class='flex justify-between items-start mb-3 gap-3'>
-                            <span class='text-xs font-medium text-gray-400 bg-gray-50 px-2 py-1 rounded border border-gray-100'>${item.time}</span>
+                            <span class='text-xs font-medium text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-900 px-2 py-1 rounded border border-gray-100 dark:border-gray-700'>${item.time}</span>
                             <span class='px-2.5 py-1 rounded-md text-xs font-bold border shadow-sm ${badgeColor}'>
                                 ${item.riskTitle}
                             </span>
                         </div>
-                        <p class='text-gray-700 text-sm md:text-base line-clamp-3 italic bg-gray-50 p-3 rounded-lg flex-grow'>
+                        <p class='text-gray-700 dark:text-gray-300 text-sm md:text-base line-clamp-3 italic bg-gray-50 dark:bg-gray-900 p-3 rounded-lg flex-grow'>
                             "${item.text}"
                         </p>
                     </div>`;
@@ -1385,7 +1781,7 @@
             }
         }
 
-        // Add custom animation styles dynamically
+        // Tạo CSS động hỗ trợ hiệu ứng quét Laser (Swipe Scanner) và FadeIn
         const style = document.createElement('style');
         style.innerHTML = `
             @keyframes fadeIn {
@@ -1395,11 +1791,22 @@
             .animate-fade-in {
                 animation: fadeIn 0.4s ease-out forwards;
             }
+            @keyframes laserSwipe {
+                0% { top: 0%; opacity: 0; }
+                10% { opacity: 1; }
+                90% { opacity: 1; }
+                100% { top: 100%; opacity: 0; }
+            }
+            .animate-swipe {
+                animation: laserSwipe 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            }
         `;
         document.head.appendChild(style);
 
         window.onload = () => {
             renderHistory();
+            renderAiLogs(); // Khởi tạo và kết xuất danh sách logs kỹ thuật
+            updateAiLimitUI(); // Cập nhật Widget đo lường hạn mức trong phiên
             renderLibrary('all');
             startPractice();
         }; 
