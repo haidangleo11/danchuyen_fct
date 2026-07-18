@@ -1465,21 +1465,108 @@
                 { text: 'Shopee xác nhận đơn hàng #12345 sẽ giao ngày mai.', label: 'safe', reason: 'Thông báo giao hàng thông thường, không chứa link nguy hiểm hay yêu cầu nạp tiền.' },
                 { text: 'Bộ Công An yêu cầu chuyển tiền để điều tra.', label: 'scam', reason: 'Cơ quan nhà nước không bao giờ làm việc qua điện thoại hoặc yêu cầu chuyển tiền vào tài khoản cá nhân.' },
                 { text: 'Bạn vừa đăng nhập Gmail từ thiết bị mới.', label: 'safe', reason: 'Thông báo bảo mật cảnh báo đăng nhập hợp lệ từ Google.' },
-                { text: 'Chúc mừng bạn trúng iPhone 16 Pro Max.', label: 'scam', reason: 'Chiêu trò đánh vào lòng tham, thường yêu cầu đóng phí nhận thưởng.' }
+                { text: 'Chúc mừng bạn trúng iPhone 16 Pro Max.', label: 'scam', reason: 'Chiêu trò đánh vào lòng tham, thường yêu cầu đóng phí nhận thưởng.' },
+                { text: 'Thông báo từ phòng đào tạo: lớp học bắt đầu lúc 8h sáng.', label: 'safe', reason: 'Tin nhắn nội bộ thông thường, không có yêu cầu chuyển tiền hay bấm link.' },
+                { text: 'Bạn nhận được lời mời làm việc từ công ty nước ngoài, cần nộp phí hồ sơ.', label: 'scam', reason: 'Đề nghị nộp phí trước khi xác thực thường là chiêu trò lừa đảo.' },
+                { text: 'Mã xác thực OTP của bạn là 482913.', label: 'safe', reason: 'Thông tin mã OTP được gửi khi bạn chủ động đăng nhập.' },
+                { text: 'Ngân hàng gọi điện bảo bạn cần chuyển tiền để khóa tài khoản.', label: 'scam', reason: 'Nhân viên ngân hàng thật không bao giờ yêu cầu chuyển tiền để khóa tài khoản.' },
+                { text: 'Hệ thống Zalo đã gửi tin nhắn xác nhận đăng nhập thành công.', label: 'safe', reason: 'Thông báo hệ thống sau khi đăng nhập thành công là hợp lệ.' }
             ],
             [
                 { text: 'MB Bank: tài khoản sẽ bị khóa sau 30 phút.', label: 'scam', reason: 'Tạo áp lực thời gian khẩn cấp để nạn nhân không kịp suy nghĩ.' },
                 { text: 'Facebook gửi mã xác nhận đăng nhập là 918231.', label: 'safe', reason: 'Thông báo mã OTP xác thực bình thường khi đăng nhập thiết bị mới.' },
                 { text: 'Bạn được hoàn thuế 5 triệu đồng, bấm link nhận tiền ngay.', label: 'scam', reason: 'Thủ đoạn lừa đảo phổ biến dụ người dùng bấm link giả mạo cơ quan thuế.' },
                 { text: 'Lịch học ngày mai được chuyển sang phòng A203.', label: 'safe', reason: 'Thông báo nội bộ sinh hoạt bình thường.' },
-                { text: 'Chuyển ngay 2 triệu để xác minh nâng cấp tài khoản.', label: 'scam', reason: 'Không có quy trình xác minh danh tính nào yêu cầu chuyển khoản tiền.' }
+                { text: 'Chuyển ngay 2 triệu để xác minh nâng cấp tài khoản.', label: 'scam', reason: 'Không có quy trình xác minh danh tính nào yêu cầu chuyển khoản tiền.' },
+                { text: 'Tin nhắn từ bệnh viện: lịch hẹn khám được đổi sang 14h.', label: 'safe', reason: 'Thông báo hẹn khám từ cơ sở y tế là hợp lệ.' },
+                { text: 'Bạn được chọn tham gia chương trình “đổi quà miễn phí”, cần trả phí vận chuyển trước.', label: 'scam', reason: 'Yêu cầu trả phí trước khi nhận quà là dấu hiệu lừa đảo.' },
+                { text: 'Bạn vừa thay đổi mật khẩu tài khoản Microsoft.', label: 'safe', reason: 'Thông báo bảo mật khi chủ tài khoản tự thay đổi mật khẩu.' },
+                { text: 'Nhân viên công nghệ yêu cầu bạn cài phần mềm remote để hỗ trợ.', label: 'scam', reason: 'Cài phần mềm điều khiển từ xa từ người lạ có thể dẫn đến mất dữ liệu.' },
+                { text: 'Lịch sử giao dịch của bạn đã được cập nhật thành công.', label: 'safe', reason: 'Thông báo tự động từ hệ thống ngân hàng là hợp lệ.' }
             ],
             [
                 { text: 'VNeID của bạn sắp hết hạn, tải APK này để cập nhật.', label: 'scam', reason: 'Phần mềm APK lạ chứa mã độc chiếm quyền điều khiển điện thoại.' },
                 { text: 'Lịch khám bệnh của bạn vào lúc 9h sáng tại phòng 204.', label: 'safe', reason: 'Tin nhắn nhắc lịch hẹn y tế tự động.' },
                 { text: 'Ngân hàng yêu cầu gửi lại mã OTP để xác minh chủ tài khoản.', label: 'scam', reason: 'Tuyệt đối không cung cấp mã OTP cho bất kỳ ai, kể cả nhân viên ngân hàng.' },
                 { text: 'Mật khẩu Apple ID vừa được thay đổi.', label: 'safe', reason: 'Thông báo bảo mật tự động của hệ thống.' },
-                { text: 'Bạn trúng xe SH từ chương trình tri ân 20 năm.', label: 'scam', reason: 'Mồi nhử phần thưởng ảo để lừa phí trước bạ hoặc vận chuyển.' }
+                { text: 'Bạn trúng xe SH từ chương trình tri ân 20 năm.', label: 'scam', reason: 'Mồi nhử phần thưởng ảo để lừa phí trước bạ hoặc vận chuyển.' },
+                { text: 'Bạn nhận được thư xác nhận từ trường học về lịch thi.', label: 'safe', reason: 'Thông báo từ trường học là hợp lệ và không có yêu cầu chuyển tiền.' },
+                { text: 'Một người lạ gửi link “xem kết quả trúng thưởng” và đòi nhập thông tin thẻ.', label: 'scam', reason: 'Nhập thông tin thẻ vào link không rõ nguồn có thể bị đánh cắp.' },
+                { text: 'Hệ thống Grab đã cập nhật đơn hàng của bạn thành công.', label: 'safe', reason: 'Thông báo giao dịch chuẩn từ ứng dụng vận chuyển.' },
+                { text: 'Tài khoản của bạn sẽ bị khóa nếu không đăng nhập ngay trong 5 phút.', label: 'scam', reason: 'Kích hoạt tâm lý gấp gáp để người dùng bấm vào link độc hại.' },
+                { text: 'Bạn đã nhận được hóa đơn tiền điện tháng này.', label: 'safe', reason: 'Thông báo thông thường từ dịch vụ tiện ích và không có hành vi lừa đảo.' }
+            ],
+            [
+                { text: 'Cảnh báo: đơn hàng của bạn bị nghi ngờ, hãy bấm vào đường dẫn kiểm tra ngay.', label: 'scam', reason: 'Đường dẫn không rõ nguồn có thể dẫn đến trang giả mạo.' },
+                { text: 'Lịch bảo trì hệ thống ngân hàng bắt đầu lúc 22h tối nay.', label: 'safe', reason: 'Thông báo từ ngân hàng về thời gian bảo trì là hợp lệ.' },
+                { text: 'Bạn được mời tham gia nhóm “việc làm online” và cần nộp phí đăng ký.', label: 'scam', reason: 'Yêu cầu chi phí trước khi được tuyển dụng là dấu hiệu lừa đảo.' },
+                { text: 'Hệ thống bảo mật đã gửi tin nhắn xác nhận thay đổi email.', label: 'safe', reason: 'Thông báo bảo mật tự động thường rất hợp lệ.' },
+                { text: 'Bấm vào link để nhận tiền thưởng từ tài khoản ngân hàng.', label: 'scam', reason: 'Ưu đãi tiền thưởng không bao giờ đòi người dùng bấm link lạ.' },
+                { text: 'Bạn đã đăng ký thành công hội thảo trực tuyến.', label: 'safe', reason: 'Thông báo đăng ký sự kiện là bình thường và không nguy hiểm.' },
+                { text: 'Công ty bảo hiểm gọi điện hỏi về mã OTP để xác nhận khoản bồi thường.', label: 'scam', reason: 'Không ai nên cung cấp mã OTP cho bất kỳ lý do nào.' },
+                { text: 'Tin nhắn từ trường đại học: buổi học online bắt đầu lúc 7h.', label: 'safe', reason: 'Thông báo học tập nội bộ là thông thường.' },
+                { text: 'Một người tên “thanh tra” yêu cầu gửi ảnh CCCD để hoàn thuế.', label: 'scam', reason: 'Yêu cầu dữ liệu cá nhân nhạy cảm qua tin nhắn là lừa đảo.' },
+                { text: 'Bạn đã thanh toán hóa đơn nước thành công.', label: 'safe', reason: 'Thông báo giao dịch thành công từ dịch vụ tiện ích là hợp lệ.' }
+            ],
+            [
+                { text: 'Tin nhắn từ phòng vé: vé của bạn đã được xác nhận.', label: 'safe', reason: 'Thông báo vé xác nhận thường đến từ hệ thống chính thức.' },
+                { text: 'Bạn được mời nhận thưởng “miễn phí” nhưng cần trả phí xử lý trước.', label: 'scam', reason: 'Đòi tiền trước để nhận thưởng là phương thức lừa đảo phổ biến.' },
+                { text: 'Hệ thống Payoo phát hiện giao dịch bất thường, hãy xác nhận ngay.', label: 'safe', reason: 'Thông báo cảnh báo giao dịch bất thường có thể là thực tế và cần kiểm tra qua kênh chính thức.' },
+                { text: 'Đường dây nóng hỗ trợ tài khoản đòi bạn gửi mật khẩu mới.', label: 'scam', reason: 'Không có đơn vị nào nên yêu cầu mật khẩu tài khoản qua điện thoại.' },
+                { text: 'Tài khoản Facebook của bạn đã được đăng nhập từ thiết bị mới.', label: 'safe', reason: 'Thông báo đăng nhập thiết bị mới là bình thường khi có chủ sở hữu.' },
+                { text: 'Bạn nhận được thư mời “đầu tư” với lợi nhuận cao, hãy chuyển tiền ngay.', label: 'scam', reason: 'Lợi nhuận cao trong thời gian ngắn là dấu hiệu đầu tư lừa đảo.' },
+                { text: 'Lịch trình chuyến bay của bạn đã được cập nhật.', label: 'safe', reason: 'Thông báo từ hãng hàng không là đúng và đáng tin cậy.' },
+                { text: 'Một nhân viên “bảo trì” yêu cầu bạn cấp quyền điều khiển máy tính.', label: 'scam', reason: 'Cấp quyền điều khiển cho người lạ có thể làm rò rỉ dữ liệu.' },
+                { text: 'Bạn đã nhận được mã xác nhận để đổi mật khẩu.', label: 'safe', reason: 'Mã xác minh đổi mật khẩu là hành động thường thấy khi chủ sở hữu chủ động.' },
+                { text: 'TikTok gửi thư hứa tăng lượt xem nếu bạn trả phí đăng ký.', label: 'scam', reason: 'Dịch vụ tăng tương tác không đáng tin cậy và thường lừa tiền.' }
+            ],
+            [
+                { text: 'Thông báo: đơn hàng giao hàng đang bị chậm, hãy xác nhận lại địa chỉ.', label: 'safe', reason: 'Thông báo từ đơn vị vận chuyển là hợp lệ khi cần xác nhận địa chỉ.' },
+                { text: 'GHTK báo bạn cần đóng phí phát sinh để nhận hàng.', label: 'scam', reason: 'Đề nghị thu thêm phí bất thường sau khi giao hàng là dấu hiệu lừa đảo.' },
+                { text: 'Bạn mới nhận được cuộc gọi từ nhà mạng về gói cước đã hết hạn.', label: 'safe', reason: 'Thông báo từ nhà mạng về dịch vụ là hợp lệ.' },
+                { text: 'Một người gọi tên “thanh tra mạng” yêu cầu bạn mở link để kiểm tra SIM.', label: 'scam', reason: 'Link kiểm tra SIM không rõ nguồn có thể chứa mã độc.' },
+                { text: 'Điện thoại của bạn đã nhận được tin nhắn về hóa đơn internet.', label: 'safe', reason: 'Thông báo cước internet là hoạt động bình thường.' },
+                { text: 'Bạn được tặng voucher trị giá 1 triệu nhưng phải nộp thông tin thẻ.', label: 'scam', reason: 'Cung cấp thông tin thẻ cho voucher không rõ nguồn là rủi ro lớn.' },
+                { text: 'Bạn đã đăng ký nhận bản tin từ ngân hàng thành công.', label: 'safe', reason: 'Đăng ký bản tin từ ngân hàng là bình thường.' },
+                { text: 'Người lạ yêu cầu bạn chuyển khoản để “giải quyết lỗi giao dịch”.', label: 'scam', reason: 'Nhấn mạnh lỗi giao dịch để dụ người dùng chuyển tiền là thủ đoạn lừa đảo.' },
+                { text: 'Hệ thống đã gửi thông báo về việc đổi số điện thoại đăng ký.', label: 'safe', reason: 'Thông báo đổi thông tin đăng ký là hợp lệ nếu đến từ hệ thống chính thức.' },
+                { text: 'Bạn được hứa lợi nhuận 20% mỗi ngày nếu đầu tư ngay hôm nay.', label: 'scam', reason: 'Lợi nhuận cao bất thường là dấu hiệu lừa đảo đầu tư.' }
+            ],
+            [
+                { text: 'Bạn nhận được email xác nhận giao dịch từ Amazon.', label: 'safe', reason: 'Email xác nhận giao dịch từ nền tảng thương mại điện tử là hợp lệ.' },
+                { text: 'Email yêu cầu bạn bấm link để “xác minh tài khoản” nhưng không có tên miền rõ ràng.', label: 'scam', reason: 'Email lừa đảo thường giả mạo giao diện xác minh tài khoản.' },
+                { text: 'Hệ thống đã xác nhận thanh toán đơn hàng thành công.', label: 'safe', reason: 'Thông báo thanh toán thành công từ hệ thống là tin cậy.' },
+                { text: 'Một người gọi bảo rằng bạn sẽ bị khóa tài khoản nếu không cung cấp mã PIN.', label: 'scam', reason: 'Không bao giờ cung cấp mã PIN cho người gọi lạ.' },
+                { text: 'Bạn vừa nhận được tin nhắn từ công ty vận chuyển về hàng hóa đang đến.', label: 'safe', reason: 'Thông báo tình trạng đơn hàng là bình thường và hợp lệ.' },
+                { text: 'Bấm vào đường dẫn để “kiểm tra hồ sơ” và đổi mật khẩu ngay.', label: 'scam', reason: 'Đường dẫn giả mạo có thể đánh cắp mật khẩu.' },
+                { text: 'Bạn đã đổi số điện thoại đăng ký thành công.', label: 'safe', reason: 'Thông báo thay đổi thông tin đăng ký từ hệ thống là hợp lệ.' },
+                { text: 'Công ty bảo hiểm báo bạn cần chuyển khoản để nhận tiền bồi thường.', label: 'scam', reason: 'Đòi chuyển tiền trước khi bồi thường là dấu hiệu lừa đảo.' },
+                { text: 'Mã xác thực đăng nhập đã được gửi tới email của bạn.', label: 'safe', reason: 'Mã xác thực từ hệ thống là hành vi bình thường khi đăng nhập.' },
+                { text: 'Một đường link “xem kết quả xổ số” yêu cầu nhập số tài khoản ngân hàng.', label: 'scam', reason: 'Đường link trúng thưởng thường dùng để đánh cắp dữ liệu ngân hàng.' }
+            ],
+            [
+                { text: 'Bạn vừa nhận được tin nhắn từ bệnh viện về lịch tái khám.', label: 'safe', reason: 'Thông báo y tế từ bệnh viện là hợp lệ.' },
+                { text: 'Một người nhắn tin rằng bạn được nhận trợ cấp và cần nộp phí trước.', label: 'scam', reason: 'Thủ đoạn lừa đảo thường mồi nhử bằng trợ cấp giả.' },
+                { text: 'Hệ thống đã gửi thông báo về việc đổi mật khẩu email.', label: 'safe', reason: 'Thông báo đổi mật khẩu email là bình thường khi chủ tài khoản tự thực hiện.' },
+                { text: 'Bạn được yêu cầu cài app giả để nhận thưởng nhanh.', label: 'scam', reason: 'App giả mạo có thể đánh cắp thông tin và cài mã độc.' },
+                { text: 'Bạn nhận được tin nhắn xác nhận đặt lịch khám từ phòng khám.', label: 'safe', reason: 'Thông báo đặt lịch khám từ phòng khám là thông thường.' },
+                { text: 'Số điện thoại của bạn đang bị khóa, hãy gọi lại để kích hoạt.', label: 'scam', reason: 'Gọi lại vào số không rõ nguồn có thể đưa bạn vào lừa đảo.' },
+                { text: 'Bạn đã nhận được email về hóa đơn dịch vụ đã thanh toán.', label: 'safe', reason: 'Email hóa đơn là thông báo hợp lệ từ nhà cung cấp.' },
+                { text: 'Một người lạ bảo bạn cần chuyển tiền để “khôi phục tài khoản”.', label: 'scam', reason: 'Đòi chuyển tiền để khôi phục tài khoản là thủ đoạn lừa đảo rất phổ biến.' },
+                { text: 'Lịch học trực tuyến đã được cập nhật trên hệ thống.', label: 'safe', reason: 'Thông báo lịch học từ hệ thống giáo dục là hợp lệ.' },
+                { text: 'Một đường link “xem kết quả học bổng” yêu cầu nhập CCCD.', label: 'scam', reason: 'Yêu cầu dữ liệu cá nhân nhạy cảm qua link không rõ nguồn là rủi ro.' }
+            ],
+            [
+                { text: 'Bạn vừa nhận được tin nhắn xác nhận đặt hàng từ cửa hàng trực tuyến.', label: 'safe', reason: 'Thông báo đặt hàng từ cửa hàng trực tuyến là hợp lệ.' },
+                { text: 'Một người nhắn tin bảo bạn cần chuyển tiền để giữ hàng.', label: 'scam', reason: 'Đòi tiền thêm để giữ đơn hàng là dấu hiệu lừa đảo.' },
+                { text: 'Hệ thống đã gửi thông báo về việc thay đổi địa chỉ giao hàng.', label: 'safe', reason: 'Thông báo thay đổi thông tin giao hàng là bình thường.' },
+                { text: 'Bạn được mời tham gia “chương trình chia sẻ” và cần nhập số thẻ.', label: 'scam', reason: 'Nhập số thẻ vào form không rõ nguồn có thể bị đánh cắp.' },
+                { text: 'Mật khẩu tài khoản ngân hàng của bạn đã được cập nhật.', label: 'safe', reason: 'Thông báo cập nhật mật khẩu từ hệ thống là hợp lệ.' },
+                { text: 'Một người gọi bảo bạn bị phạt vi phạm và cần chuyển tiền ngay.', label: 'scam', reason: 'Tạo áp lực về phạt vi phạm là thủ đoạn lừa đảo.' },
+                { text: 'Bạn nhận email xác nhận đăng ký dịch vụ mới.', label: 'safe', reason: 'Email xác nhận đăng ký là hành vi hợp lệ.' },
+                { text: 'Bấm vào link để nhận hoàn tiền từ đơn hàng bị hủy.', label: 'scam', reason: 'Link hoàn tiền giả có thể dẫn tới trang giả mạo.' },
+                { text: 'Hệ thống đã gửi mã OTP cho giao dịch thanh toán.', label: 'safe', reason: 'OTP cho giao dịch là hoạt động bình thường khi khách hàng chủ động thanh toán.' },
+                { text: 'Một người hứa “tăng doanh thu” nếu bạn đầu tư ngay hôm nay.', label: 'scam', reason: 'Hứa lợi nhuận nhanh với đầu tư không rõ nguồn là lừa đảo.' }
             ]
         ];
 
